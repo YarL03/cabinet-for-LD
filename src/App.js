@@ -5,22 +5,28 @@ import Profile from "./UI/Profile/Profile";
 
 import "./styles/App.css";
 import { BrowserRouter, Route } from "react-router-dom";
+import Main from "./UI/Main/Main";
 
 function App() {
-  const [value, setValue] = useState("Текст здесь");
+  const [cards, setCard] = useState([
+    {numbers: 123, name: 'viewers'},
+    {numbers: 124, name: 'hoock'},
+    {numbers: 125, name: 'map'}
+  ]);
 
   return (
-    <BrowserRouter>
+    
     <div className="App">
       <Header/>
       <Navbar/>
       <div>
-      <Profile/>
+        {/* <Main/> */}
+      {/* <Profile/> */}
       {/* <Route path="/profile" component={Profile}/> */}
       </div>
       
     </div>
-    </BrowserRouter>
+    
   );
 }
 

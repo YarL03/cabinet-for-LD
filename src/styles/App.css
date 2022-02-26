@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&displat=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+:root {
+    --blue: #287bff;
+    --white: #fff;
+    --grey: #f5f5f5;
+    --black1: #222;
+    --black2: #999
+}
+
+.app {
+    position: relative;
+    width: 100%;
+}
+
+.nav {
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: var(--blue);
+    border-left: 10px solid var(--blue);
+    overflow: hidden;
+}
+
+.nav ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.nav ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+    font-weight: 600;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.nav ul li:hover {
+    background: var(--white);
+}
+
+.nav ul li:nth-child(1) {
+    margin-bottom: 40px;
+    pointer-events: none;
+}
+
+.nav ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration:  none;
+    color: var(--white);
+}
+
+.nav ul li:hover a{
+    color: var(--blue);
+}
+
+.nav ul li a .icon {
+    position: relative;
+    min-width: 60px;
+    height: 60px;
+    line-height: 75px;
+    text-align: center;
+}
+
+.nav ul li a .icon.brandname img {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    top: calc(25% /2);
+}
+
+.nav ul li a .title {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}   
+
+.nav ul li a .ionicon  {
+    width: 30px;
+}
+
+.header img {
+    width: 60px;
+}
+
+/* curve outside */
+
+.nav ul li:hover a::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px var(--white);
+    pointer-events: none;
+}
+
+.nav ul li:hover a::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px var(--white);
+    pointer-events: none;
+}
+
+/* header */
+
+.header {
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    height: 60px;
+}
+
+.topbar {
+    display: flex;
+    
+    align-items: center;
+    padding: 0 10px;
+}
+
+.toggle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.toggle svg {
+    cursor: pointer;
+    width: 40px;
+}
+
+.search {
+    position: relative;
+    left: calc(50% - 270px);
+    width: 400px;
+    margin: 0 10px;
+}
+
+.search label {
+    position: relative;
+    width: 100%;
+}
+
+.search label input {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    padding: 5px 20px;
+    padding-left: 35px;
+    font-size: 18px;
+    outline: none;
+    border: 1px solid var(--black2);
+}
+
+.search label svg {
+    width: 20px;
+    position: absolute;
+    top: 0;
+    left: 10px;
+}
+
+/* profile */
+
+.profile {
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    top: 60px;
+    min-height: calc(100vh - 60px);
+}
+
+.user {
+    position: relative;
+    width: 150px;
+    
+}
+
+.user img {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 150px;
+    
+}

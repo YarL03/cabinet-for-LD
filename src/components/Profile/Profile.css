@@ -1,0 +1,23 @@
+/* profile */
+
+.profile {
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    top: 60px;
+    min-height: calc(100vh - 60px);
+}
+
+.userAva {
+    position: relative;
+    width: 150px;
+    
+}
+
+.userAva img {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 150px;
+    
+}

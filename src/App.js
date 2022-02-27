@@ -8,19 +8,15 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Main from "./UI/Main/Main";
 
 function App() {
-  const [cards, setCard] = useState([
-    {numbers: 123, name: 'viewers'},
-    {numbers: 124, name: 'hoock'},
-    {numbers: 125, name: 'map'}
-  ]);
+  
 
   return (
     
     <div className="App">
       <Header/>
       <Navbar/>
-      <div>
-        {/* <Main/> */}
+      <div className="content-wrapper">
+        <Main/>
       {/* <Profile/> */}
       {/* <Route path="/profile" component={Profile}/> */}
       </div>

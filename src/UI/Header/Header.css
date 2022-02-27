@@ -3,6 +3,12 @@
     width: calc(100% - 300px);
     left: 300px;
     height: 60px;
+    transition: .5s;
+}
+
+.header.active {
+    width: calc(100% - 80px);
+    left: 80px;
 }
 
 .topbar {

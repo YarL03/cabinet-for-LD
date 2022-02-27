@@ -1,8 +1,9 @@
 import React from "react";
 import s from "./Card.module.css";
 
+
 const Card = ({card}) => {
-  console.log(card)
+  
   return (
   
       <div className={s.card}>
@@ -11,7 +12,7 @@ const Card = ({card}) => {
           <div className={s.cardName}>{card.name}</div>
         </div>
         <div className={s.iconBox}>
-            svg
+            {card.svg}
         </div>
       </div>
       

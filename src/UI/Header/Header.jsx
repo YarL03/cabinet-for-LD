@@ -1,11 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import './Header.css'
 
 const Header = () => {
+
+
+    function addActive(e) {
+        document.querySelector('.nav').classList.toggle('active')
+        document.querySelector('.header').classList.toggle('active')
+        document.querySelector('.content-wrapper').classList.toggle('active')
+    }
+
     return (
         <header className="header">
             <div className="topbar">
-                <div className="toggle">
+                <div onClick={addActive} className="toggle">
                 <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352"/></svg>
                 </div>
                 <div className="search">

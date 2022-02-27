@@ -13,4 +13,10 @@
     left: 300px;
     top: 60px;
     min-height: calc(100vh - 60px);
+    transition: .5s;
+}
+
+.content-wrapper.active {
+    width: calc(100% - 80px);
+    left: 80px;
 }

@@ -18,6 +18,7 @@
     background: var(--blue);
     border-left: 10px solid var(--blue);
     overflow: hidden;
+    transition: .5s;
 }
 
 .nav ul {
@@ -119,3 +120,6 @@
     pointer-events: none;
 }
 
+.nav.active {
+    width: 80px;
+}

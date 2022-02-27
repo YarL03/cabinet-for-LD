@@ -10,7 +10,7 @@ const Navbar = () => {
                         <span className="icon brandname">
                             <img src="https://yarl03.github.io/LD_project/img/BSU_logo.jpg"/>
                         </span>
-                        <span className="title">Brandname</span>
+                        <span className="title">Legal clinic</span>
                     </a>
                 </li>
 

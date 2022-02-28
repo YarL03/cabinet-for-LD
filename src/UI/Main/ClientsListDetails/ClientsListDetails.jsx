@@ -32,6 +32,7 @@ const ClientsListDetails = ({clients}) => {
                 <div className={s.cardHeader}>
                     <h2>Online Users</h2>
                 </div>
+                <div className={s.tableWrapper}>
                 <table>
                     <OnlineUser/>
                     <OnlineUser/>
@@ -47,6 +48,7 @@ const ClientsListDetails = ({clients}) => {
                     
                     
                 </table>
+                </div>
             </div>
         </div>
     )

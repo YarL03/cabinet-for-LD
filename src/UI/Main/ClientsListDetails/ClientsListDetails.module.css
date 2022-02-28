@@ -10,11 +10,12 @@
 .recentActivities {
     position: relative;
     display: grid;
-    min-height: 500px;
+    height: 500px;
     background: var(--white);
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0,0,0,0.35);
     border-radius: 20px;
+    /* overflow-y:scroll; */
 }
 
 .cardHeader {
@@ -43,6 +44,7 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
+    position: relative;
 }
 
 .details table thead td {
@@ -58,6 +60,10 @@
 
 .details .recentActivities table tr:last-child {
     border-bottom: none;
+}
+
+.details .recentActivities table tbody {
+    position: relative;
 }
 
 .details .recentActivities table tbody tr:hover {
@@ -89,7 +95,17 @@
     background: var(--white);
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0,0,0,0.35);
-    overflow: hidden;
+    
+    border-radius: 30px;
+}
+
+.onlineUsers .tableWrapper {
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.onlineUsers .cardHeader {
+    border-bottom: 1px solid rgb(228, 225, 225) ;
 }
 
 .onlineUsers table {
@@ -101,6 +117,7 @@
 .onlineUsers table tr:hover {
     background:  var(--blue);
     color: var(--white);
+    border-radius: 30px;
 }
 
 .onlineUsers table tr td {

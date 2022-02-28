@@ -1,9 +1,7 @@
 /* profile */
 
 .profile {
-    position: absolute;
-    width: calc(100% - 300px);
-    left: 300px;
+    width: 100%;
     top: 60px;
     min-height: calc(100vh - 60px);
 }

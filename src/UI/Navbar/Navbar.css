@@ -55,7 +55,7 @@
     color: var(--white);
 }
 
-.nav ul li:hover a{
+.nav ul li:hover a {
     color: var(--blue);
 }
 
@@ -94,7 +94,8 @@
 
 /* curve outside */
 
-.nav ul li:hover a::before {
+.nav ul li:hover a::before
+/* .nav ul li .active::before */ {
     content: '';
     position: absolute;
     right: 0;
@@ -107,7 +108,8 @@
     pointer-events: none;
 }
 
-.nav ul li:hover a::after {
+.nav ul li:hover a::after
+/* .nav ul li .active::after */ { 
     content: '';
     position: absolute;
     right: 0;

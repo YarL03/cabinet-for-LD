@@ -1,9 +1,6 @@
 .item {
+    display: grid;
+    grid-template-columns: 50px 100%;
+    grid-template-rows: 50px;
     color: rgb(188, 41, 224);
-}
-
-.item img {
-    width: 45px;
-    border-radius: 50%;
-    
 }

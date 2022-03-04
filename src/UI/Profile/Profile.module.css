@@ -2,14 +2,18 @@
 
 .profile {
     width: 100%;
-    top: 60px;
     min-height: calc(100vh - 60px);
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    grid-gap: 200px;
+    padding: 20px 10px 0;
+    overflow-x: hidden;
 }
 
 .userAva {
     position: relative;
     width: 150px;
-    
+    margin: 0 auto;
 }
 
 .userAva img {
@@ -18,4 +22,8 @@
     left: 0;
     width: 150px;
     
+}
+
+.servicesBtns {
+    position: relative;
 }

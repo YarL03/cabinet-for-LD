@@ -2,28 +2,124 @@
 
 .profile {
     width: 100%;
+    margin: 0 auto;
     min-height: calc(100vh - 60px);
     display: grid;
-    grid-template-columns: 400px 1fr;
-    grid-gap: 200px;
-    padding: 20px 10px 0;
+    grid-template-columns: 400px 800px 1fr;
+    grid-gap: 100px;
+    padding: 20px 20px 0;
     overflow-x: hidden;
 }
 
+
 .userAva {
     position: relative;
-    width: 150px;
-    margin: 0 auto;
+    margin: 0 auto 40px;
+    width: 300px;
+    box-shadow: 0 7px 25px rgba(0,0,0,0.35);
 }
 
 .userAva img {
     position: relative;
     top: 0;
     left: 0;
-    width: 150px;
+    width: inherit;
+    padding: 10px;
     
+}
+
+.userAva span {
+    display: inline-block;
+    width: 90%;
+    text-align: center;
+    margin: 15px 0 15px 12px;
+    padding: 3px;
+    background: #d3d9df;
+    color: black;
+}
+
+.userAva span:hover {
+    background: #c3cbd3; 
 }
 
 .servicesBtns {
     position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+    align-items: center;
+    background-color: var(--white);
+    height: 400px;
+    box-shadow: 0 7px 25px rgba(0,0,0,0.35);;
+}
+
+.servicesBtns button {
+    width: 175px;
+    margin-bottom: 20px;
+    height: 35px;
+    border: none;
+    background-color: red;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px;
+}
+
+.pageInfo {
+    box-shadow: 0 7px 25px rgba(0,0,0,0.35);
+    padding: 15px;
+}
+
+.pageTop {
+    padding: 0 0 30px;
+    border-bottom: 1px solid #d9dee4;
+}
+
+.pageStatus {
+    text-align: center;
+    float: right;
+}
+
+.pageInfoShort {
+    padding-top: 10px;
+}
+
+.profileInfo {
+    line-height: 150%;
+}
+
+.infoRow {
+    padding-top: 5px;
+}
+
+.label {
+    float: left;
+    width: 165px;
+    font-weight: 400;
+    font-size: 14px;
+    color: #818c99;
+}
+
+.showMore {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    color: #2a5885;
+    height: 34px;
+    line-height: 32px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.showMore:hover {
+    background: #eceef0;
+}
+
+.showMore a span:nth-child(2) {
+    display: none;
+}
+
+.thirdColumn {
+    box-shadow: 0 7px 25px rgba(0,0,0,0.35);
 }

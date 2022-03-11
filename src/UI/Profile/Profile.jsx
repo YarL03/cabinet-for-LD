@@ -48,7 +48,6 @@ const Profile = () => {
           </div>
           <div className="counts"></div>
         </div>
-        <div className="postField"></div>
         <MyPosts />
       </div>
       <div className={s.thirdColumn}>asdas</div>

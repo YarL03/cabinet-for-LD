@@ -1,6 +1,63 @@
 .item {
-    display: grid;
-    grid-template-columns: 50px 100%;
-    grid-template-rows: 50px;
-    color: rgb(188, 41, 224);
+    box-shadow: 0 7px 25px rgba(0,0,0,.25);
+    margin-bottom: 25px;
+}
+
+.postTop {
+    display: flex;
+    padding: 15px 20px 0;
+}
+
+.userImg {
+    margin-right: 20px;
+}
+
+.postHeader {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.postAuthor {
+    display: inline-block;
+    width: 100%;
+}
+
+.date {
+    display: inline-block;
+    width: 100%;
+    font-size: 13px;
+}
+
+.message {
+    padding: 8px 20px 0;
+    margin-bottom: 8px;
+}
+
+.postActions svg {
+    cursor: pointer;
+}
+
+.likeWrap {
+    padding: 20px 20px 10px;
+}
+
+.likeCount {
+    display: flex;
+    align-items: center;
+    
+}
+
+.likeIcon {
+  
+}
+
+.likeIcon svg {
+    height: 24px;
+    width: 24px;
+}
+
+.likeAmount {
+  margin-bottom: 5px;
+  margin-left: 4px;
 }

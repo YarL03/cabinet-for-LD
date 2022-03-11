@@ -1,0 +1,49 @@
+.wrapper {
+    position: relative;
+    box-shadow: 0 7px 25px rgba(0,0,0,.25);
+    margin-bottom: 50px;
+}
+
+.userImg {
+    position: absolute;
+    left: 10px;
+    top: 20px;
+}
+
+.wrapperPost {
+    margin-left: 56px;
+    padding: 10px 10px 10px 0;
+}
+
+textarea {
+    width: 100%;
+    border-radius: 5px;
+    resize: none;
+    height: 59px;
+    padding: 15px;
+    border-color: #bfbfbf;
+    outline: none;
+    max-height: 330px;
+}
+
+textarea:focus {
+    border-color: var(--blue);
+    border-width: 2px;
+    padding: 14px;
+}
+
+textarea::-webkit-scrollbar {
+ width: 0%;
+}
+
+.postButtons {
+    display: none;
+    height: 30px;
+    align-items: center;
+}
+
+.postSubmit {
+    margin: 0 10px 5px 0;
+
+    float: right;
+}

@@ -1,12 +1,12 @@
 /* profile */
 
 .profile {
-    width: 100%;
+    justify-content: center;
     margin: 0 auto;
     min-height: calc(100vh - 60px);
     display: grid;
-    grid-template-columns: 400px 800px 1fr;
-    grid-gap: 100px;
+    grid-template-columns: 300px .6fr;
+    grid-gap: 50px;
     padding: 20px 20px 0;
     overflow-x: hidden;
 }
@@ -14,9 +14,9 @@
 
 .userAva {
     position: relative;
-    margin: 0 auto 40px;
+    
     width: 300px;
-    box-shadow: 0 7px 25px rgba(0,0,0,0.35);
+    box-shadow: 0 7px 25px rgba(0,0,0,0.25);
 }
 
 .userAva img {
@@ -34,8 +34,8 @@
     text-align: center;
     margin: 15px 0 15px 12px;
     padding: 3px;
-    background: #d3d9df;
-    color: black;
+    background: #d7dadd;
+    color: #2a5885;
 }
 
 .userAva span:hover {
@@ -48,27 +48,30 @@
     justify-content: space-evenly;
     flex-direction: column;
     width: 300px;
-    margin: 0 auto;
     align-items: center;
     background-color: var(--white);
     height: 400px;
-    box-shadow: 0 7px 25px rgba(0,0,0,0.35);;
+    box-shadow: 0 7px 25px rgba(0,0,0,0.25);;
+    margin-top: 30px;
 }
 
 .servicesBtns button {
     width: 175px;
     margin-bottom: 20px;
     height: 35px;
-    border: none;
-    background-color: red;
+    background-color: var(--blue);
     font-size: 16px;
     font-weight: 500;
-    border-radius: 10px;
+    border-color: var(--blue);
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--white);
 }
 
 .pageInfo {
-    box-shadow: 0 7px 25px rgba(0,0,0,0.35);
+    box-shadow: 0 7px 25px rgba(0,0,0,0.25);
     padding: 15px;
+    margin-bottom: 50px;
 }
 
 .pageTop {
@@ -122,4 +125,5 @@
 
 .thirdColumn {
     box-shadow: 0 7px 25px rgba(0,0,0,0.35);
+    max-height: calc(100vh - 200px);
 }

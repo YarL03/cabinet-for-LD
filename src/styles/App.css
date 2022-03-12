@@ -20,3 +20,14 @@
     width: calc(100% - 80px);
     left: 80px;
 }
+
+@media (max-width: 991px) {
+    .content-wrapper {
+        width: 100%;
+        left: 0;
+    }
+
+    .content-wrapper.active {
+        left: 300px;
+    }
+}

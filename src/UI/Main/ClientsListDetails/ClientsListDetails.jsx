@@ -3,7 +3,7 @@ import ClientDetails from "./ClientDetails/ClientDetails";
 import s from './ClientsListDetails.module.css'
 import OnlineUser from "./OnlineUser/OnlineUser";
 
-const ClientsListDetails = ({clients}) => {
+const ClientsListDetails = ({clients, onlineUsers}) => {
     return (
         <div className={s.details}>
             <div className={s.recentActivities}>
@@ -34,17 +34,9 @@ const ClientsListDetails = ({clients}) => {
                 </div>
                 <div className={s.tableWrapper}>
                 <table>
-                    <OnlineUser/>
-                    <OnlineUser/>
-                    <OnlineUser/>
-                    <OnlineUser/>
-                    <OnlineUser/>
-                    <OnlineUser/>
-                    <OnlineUser/>
-                    <OnlineUser/>
-                    <OnlineUser/>
-                    <OnlineUser/>
-                    <OnlineUser/>
+                    {onlineUsers.map(onlineUser => (
+                        <OnlineUser name={onlineUser.name} surname={onlineUser.surname}/>
+                    ))}
                     
                     
                 </table>

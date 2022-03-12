@@ -3,7 +3,7 @@ import s from "./Profile.module.css";
 import MyPosts from "./MyPosts/MyPosts";
 import { NavLink } from "react-router-dom";
 
-const Profile = () => {
+const Profile = (props) => {
   return (
     <div className={s.profile}>
       <div className="firstColumn">
@@ -48,7 +48,7 @@ const Profile = () => {
           </div>
           <div className="counts"></div>
         </div>
-        <MyPosts />
+        <MyPosts posts={props.state.posts} addPost={props.addPost}/>
       </div>
       <div className={s.thirdColumn}>asdas</div>
     </div>

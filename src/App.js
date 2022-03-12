@@ -4,10 +4,10 @@ import Navbar from "./UI/Navbar/Navbar";
 import Profile from "./UI/Profile/Profile";
 
 import "./styles/App.css";
-import { BrowserRouter, Route, Routes, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes} from "react-router-dom";
 import Main from "./UI/Main/Main";
 
-function App() {
+function App(props) {
   return (
     <BrowserRouter>
       <div className="App">
@@ -15,8 +15,8 @@ function App() {
         <Navbar />
         <div className="content-wrapper">
           <Routes>
-            <Route path="/" element={<Main/>} />
-            <Route path="/profile" element={<Profile/>} />
+            <Route path="/" element={<Main state={props.state.mainPage}/>} />
+            <Route path="/profile" element={<Profile state={props.state.profilePage} addPost={props.addPost}/>} />
           </Routes>
         </div>
       </div>

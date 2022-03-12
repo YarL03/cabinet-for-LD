@@ -79,3 +79,33 @@
     height: 100%;
     object-fit: cover;
 }
+
+@media (max-width: 991px) {
+    .header {
+        width: 100%;
+        left: 0;
+    }
+
+    .header.active {
+        width: 100%;
+        left: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .user {
+        min-width: 40px;
+    }
+
+    .toggle {
+        z-index: 1001;
+    }
+
+    .header.active .toggle {
+        position: fixed;
+        right: 0;
+        top: 0;
+        
+        color: var(--white);
+    }
+}

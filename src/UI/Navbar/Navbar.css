@@ -94,8 +94,7 @@
 
 /* curve outside */
 
-.nav ul li:hover a::before
-/* .nav ul li .active::before */ {
+.nav ul li:hover a::before {
     content: '';
     position: absolute;
     right: 0;
@@ -108,8 +107,7 @@
     pointer-events: none;
 }
 
-.nav ul li:hover a::after
-/* .nav ul li .active::after */ { 
+.nav ul li:hover a::after { 
     content: '';
     position: absolute;
     right: 0;
@@ -124,4 +122,28 @@
 
 .nav.active {
     width: 80px;
+}
+
+@media (max-width: 991px) {
+    .nav {
+        left: -300px;
+    }
+
+    .nav.active {
+        width: 300px;
+        left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav {
+        width: 100%;
+        left: -100%;
+        z-index: 1000;
+    }
+
+    .nav.active {
+        width: 100%;
+        left: 0;
+    }
 }

@@ -1,22 +1,30 @@
-import React from "react";
+import React, { useRef } from "react";
+import { rerenderApp } from "../../../render";
 import UserImg from "../../СrosspageComponents/UserImg";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+  let textPost = useRef()
 
   function addButton() {
-    document.querySelector(`#postButtons`).style.display = 'block'
+    document.querySelector(`#postButtons`).style.display = "block";
   }
 
-  function hideButton() {
-    document.querySelector(`#postButtons`).style.display = 'none'
-  } 
+  function hideButton(e) {
+    document.querySelector(`#postButtons`).style.display = "none";
+  }
 
   function resizePostArea(e) {
-    document.querySelector('#postArea').style.height = `63px`
-    let scHeight = e.target.scrollHeight
-    document.querySelector('#postArea').style.height = `${scHeight}px`
+    document.querySelector("#postArea").style.height = `63px`;
+    let scHeight = e.target.scrollHeight;
+    document.querySelector("#postArea").style.height = `${scHeight}px`;
+  }
+
+  function submitPost(e) {
+    let text = textPost.current.value
+    props.addPost(text)
+    rerenderApp()
   }
 
   return (
@@ -26,16 +34,24 @@ const MyPosts = () => {
           <UserImg />
         </div>
         <div className={s.wrapperPost}>
-          <textarea id="postArea" onKeyDown={resizePostArea} onFocus={addButton} onBlur={hideButton} placeholder="What's new?"></textarea>
+          <textarea
+            ref={textPost}
+            id="postArea"
+            onKeyDown={resizePostArea}
+            onFocus={addButton}
+            // onBlur={hideButton}
+            placeholder="What's new?"
+          ></textarea>
         </div>
         <div id="postButtons" className={s.postButtons}>
-        <button  className={s.postSubmit}>Add post</button>
+          <button onClick={submitPost} className={s.postSubmit}>
+            Post
+          </button>
         </div>
       </div>
-      <Post message="Hey, how are you?" likeAmount="5" />
-      <Post message="It's my first post" likeAmount="15" />
-      <Post />
-      <Post />
+      {props.posts.map((post) => (
+        <Post message={post.message} likeAmount={post.likeAmount} />
+      ))}
     </div>
   );
 };

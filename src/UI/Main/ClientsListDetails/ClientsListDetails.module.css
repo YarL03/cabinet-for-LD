@@ -10,7 +10,7 @@
 .recentActivities {
     position: relative;
     display: grid;
-    height: 500px;
+    min-height: 500px;
     background: var(--white);
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0,0,0,0.35);
@@ -121,4 +121,20 @@
 
 .onlineUsers table tr td {
     padding: 12px 10px;
+}
+
+@media (max-width: 768px) {
+    .details {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .recentActivities {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .cardHeader h2 {
+        font-size: 20px;
+    }
 }

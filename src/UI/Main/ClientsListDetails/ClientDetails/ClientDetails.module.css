@@ -5,3 +5,9 @@
     font-size: 16px;
     font-weight: 500;
 }
+
+@media (max-width: 768px) {
+    .status {
+        white-space: nowrap;
+    }
+}

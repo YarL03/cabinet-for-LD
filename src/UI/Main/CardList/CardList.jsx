@@ -3,7 +3,6 @@ import Card from "./Card/Card";
 import s from './CardList.module.css'
 
 const CardList = ({cards}) => {
-    console.log(cards)
     return (
         <div className={s.cardBox}>
             {cards.map(card =>

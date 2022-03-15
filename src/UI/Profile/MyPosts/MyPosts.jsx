@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
-import { rerenderApp } from "../../../render";
+import { addPostActionCreator, updatePostStateActionCreator } from "../../../redux/state";
 import UserImg from "../../СrosspageComponents/UserImg";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
-  let textPost = useRef()
+  
+  let textPost = useRef();
 
   function addButton() {
     document.querySelector(`#postButtons`).style.display = "block";
@@ -22,10 +23,19 @@ const MyPosts = (props) => {
   }
 
   function submitPost(e) {
-    let text = textPost.current.value
-    props.addPost(text)
-    rerenderApp()
+    if (!props.newPostText) return;
+    let action = addPostActionCreator()
+    
+    props.dispatch(action)
   }
+
+  const onPostChange = () => {
+    let text = textPost.current.value;
+    console.log(text);
+    let action = updatePostStateActionCreator(text)
+    
+    props.dispatch(action);
+  };
 
   return (
     <div>
@@ -40,8 +50,10 @@ const MyPosts = (props) => {
             onKeyDown={resizePostArea}
             onFocus={addButton}
             // onBlur={hideButton}
+            onChange={onPostChange}
             placeholder="What's new?"
-          ></textarea>
+            value={props.newPostText}
+          />
         </div>
         <div id="postButtons" className={s.postButtons}>
           <button onClick={submitPost} className={s.postSubmit}>

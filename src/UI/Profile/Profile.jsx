@@ -4,6 +4,7 @@ import MyPosts from "./MyPosts/MyPosts";
 import { NavLink } from "react-router-dom";
 
 const Profile = (props) => {
+ 
   return (
     <div className={s.profile}>
       <div className="firstColumn">
@@ -48,7 +49,9 @@ const Profile = (props) => {
           </div>
           <div className="counts"></div>
         </div>
-        <MyPosts posts={props.state.posts} addPost={props.addPost}/>
+        <MyPosts posts={props.profilePage.posts} 
+        newPostText={props.profilePage.newPostText}
+        dispatch={props.dispatch}/>
       </div>
       <div className={s.thirdColumn}>asdas</div>
     </div>

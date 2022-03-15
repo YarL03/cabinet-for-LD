@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import store from './redux/state';
+import React from "react";
 import ReactDOM from 'react-dom';
 import App from './App';
-import BriefcaseSVG from './UI/Main/svg/BriefcaseSVG';
-import ChatBubblesSVG from './UI/Main/svg/ChatBubblesSVG';
-import EyeSVG from './UI/Main/svg/EyeSVG';
-import MagnifierSVG from './UI/Main/svg/MagnifierSVG';
-import state from './redux/state';
-import {addPost} from './redux/state'
-import { rerenderApp } from './render';
+import { BrowserRouter } from 'react-router-dom';
 
-rerenderApp()
+let rerenderApp = (state) => {
+    ReactDOM.render(
+      <BrowserRouter>
+      <App state={state} dispatch={store.dispatch.bind(store)}/>
+      </BrowserRouter>,
+    document.getElementById('root')
+  );
+  }
+
+rerenderApp(store.getState())
+store.subscribe(rerenderApp)

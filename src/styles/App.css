@@ -6,28 +6,3 @@
     box-sizing: border-box;
     font-family: 'Ubuntu', sans-serif;
 }
-
-.content-wrapper {
-    position: absolute;
-    width: calc(100% - 300px);
-    left: 300px;
-    top: 60px;
-    min-height: calc(100vh - 60px);
-    transition: .5s;
-}
-
-.content-wrapper.active {
-    width: calc(100% - 80px);
-    left: 80px;
-}
-
-@media (max-width: 991px) {
-    .content-wrapper {
-        width: 100%;
-        left: 0;
-    }
-
-    .content-wrapper.active {
-        left: 300px;
-    }
-}

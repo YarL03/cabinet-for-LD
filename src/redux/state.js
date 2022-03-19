@@ -102,6 +102,14 @@ let store = {
       ],
       newPostText: "",
     },
+    messagesPage: {
+      dialogs: [
+        {id: 1, message: "Hey, how are you?", name: "Ivan Ivanov", date: `${new Date().getHours()}:${new Date().getMinutes()}`},
+        {id: 2, message: "Hey, buddy! Your project is pretty good", name: "Yaroslav Labetsky", date: `${new Date().getHours()}:${new Date().getMinutes()}`},
+        {id: 3, message: "Hey, how are you doing?", name: "Victoria Mongush", date: `14:53`},
+        {id: 4, message: "Yeah, exactly", name: "Vladimir Uvarov", date: `10:28`},
+      ]
+    }
   },
 
   _callSubscriber() {},

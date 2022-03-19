@@ -1,27 +1,41 @@
-import React, { useState } from "react";
-import Header from "./UI/Header/Header";
-import Navbar from "./UI/Navbar/Navbar";
+import React from "react";
 import Profile from "./UI/Profile/Profile";
 
 import "./styles/App.css";
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Main from "./UI/Main/Main";
+import { Messages } from "./UI/Messages/Messages";
+import { Layout } from "./UI/Layout/Layout";
+import { Dialog } from "./UI/Messages/Dialog/Dialog";
 
 function App(props) {
-  
   return (
-    
-      <div className="App">
-        <Header />
-        <Navbar />
-        <div className="content-wrapper">
-          <Routes>
-            <Route path="/" element={<Main mainPage={props.state.mainPage}/>} />
-            <Route path="/profile" element={<Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>} />
-          </Routes>
-        </div>
-      </div>
-    
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Main mainPage={props.state.mainPage} />} />
+          <Route
+            path="profile"
+            element={
+              <Profile
+                profilePage={props.state.profilePage}
+                dispatch={props.dispatch}
+              />
+            }
+          />
+          <Route
+            path="messages"
+            element={
+              <Messages
+                messagesPage={props.state.messagesPage}
+                dispatch={props.dispatch}
+              />
+            }
+          />
+          <Route path="messages/:id" element={<Dialog/>}/>
+        </Route>
+      </Routes>
+    </div>
   );
 }
 

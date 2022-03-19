@@ -41,7 +41,7 @@ const MyPosts = (props) => {
     <div>
       <div className={s.wrapper}>
         <div className={s.userImg}>
-          <UserImg />
+          <UserImg/>
         </div>
         <div className={s.wrapperPost}>
           <textarea

@@ -2,7 +2,6 @@
 
 .profile {
     justify-content: center;
-    margin: 0 auto;
     min-height: calc(100vh - 60px);
     display: grid;
     grid-template-columns: 300px .6fr;

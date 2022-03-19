@@ -37,13 +37,18 @@ textarea::-webkit-scrollbar {
 }
 
 .postButtons {
-    display: none;
-    height: 30px;
-    align-items: center;
+    height: 40px;
 }
 
 .postSubmit {
     margin: 0 10px 5px 0;
-
+    background-color: var(--blue);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 2px 10px;
+    border-color: var(--blue);
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--white);
     float: right;
 }

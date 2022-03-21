@@ -12,7 +12,7 @@ export const DialogItem = (props) => {
                 <div className={s.nameDialog}>{props.name}</div>
                 <div className={s.content}>
                     <div className={s.innerImg}><UserImg/></div>
-                    <div className={s.message}><span>{props.message}</span></div>
+                    <div className={s.message}><span>{props.messages}</span></div>
                 </div>
             </div>
             <div className={s.time}>{props.date}</div>

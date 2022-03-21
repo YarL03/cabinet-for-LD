@@ -1,0 +1,31 @@
+.message {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.message .userImg {
+    margin-right: 10px;
+}
+
+.message .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.message .content .nameAndDate {
+    display: flex;
+}
+
+.message .content .nameAndDate .name {
+    margin-right: 10px;
+    color: var(--blue2);
+}
+
+.message .content .nameAndDate .date {
+    color: var(--grey3);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+}

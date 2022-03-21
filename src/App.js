@@ -32,7 +32,7 @@ function App(props) {
               />
             }
           />
-          <Route path="messages/:id" element={<Dialog/>}/>
+          <Route path="messages/:id" element={<Dialog dialogsData={props.state.messagesPage.dialogs}/>}/>
         </Route>
       </Routes>
     </div>

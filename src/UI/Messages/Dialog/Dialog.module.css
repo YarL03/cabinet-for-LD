@@ -10,7 +10,7 @@
 .firstColumn {
     box-shadow: 0 7px 25px rgba(0, 0, 0, .25);
     display: grid;
-    grid-template-rows: 50px calc(95vh - 187px) 77px;
+    grid-template-rows: 50px calc(95vh - 187px) 70px;
 }
 
 .secondColumn {
@@ -20,11 +20,12 @@
 .topbar {
     border-bottom: 2px solid var(--grey2);
     display: flex;
-    
+    align-items: center;
 }
 
 .topbar .back {
     display: flex;
+    height: 100%;
     width: 90px;
     text-align: center;
     align-items: center;
@@ -47,6 +48,47 @@
     color: var(--grey3);
 }
 
+.topbar .userImg {
+    margin: 0 10px;
+}
+
+.topbar .actions svg {
+    cursor: pointer;
+}
+
+.messagesArea .area {
+    height: 100%;
+    display: flex;
+    padding: 0 30px;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
 .textArea {
     border-top: 2px solid var(--grey2);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.textArea .docs {
+    height: 45px;
+    width: 5%;
+}
+
+.textArea textarea {
+    width: 80%;
+    height: 45px;
+}
+
+.textArea button {
+    margin: 0 10px 5px 0;
+    background-color: var(--blue);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 2px 10px;
+    border-color: var(--blue);
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--white);
 }

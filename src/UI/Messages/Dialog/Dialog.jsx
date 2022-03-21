@@ -1,16 +1,22 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import UserImg from "../../СrosspageComponents/UserImg";
 import { Chats } from "../Chats/Chats";
 import s from "./Dialog.module.css";
+import { Message } from "./Message/Message";
 
 export const Dialog = (props) => {
+  const {id} = useParams()
+  const data = props.dialogsData.filter(item => item.id == id)[0]
+  console.log(data)
+
   return (
     <div className={s.dialog}>
       <div className={s.firstColumn}>
         <div className={s.topbar}>
           <div className={s.back}>Back</div>
           <div className={s.nameStatus}>
-            <div className={s.name}>Ivan Ivanov</div>
+            <div className={s.name}>{data.name}</div>
             <div className={s.status}>online</div>
           </div>
           <div className={s.actions}>
@@ -45,8 +51,17 @@ export const Dialog = (props) => {
             <UserImg />
           </div>
         </div>
-        <div className={s.messagesArea}></div>
-        <div className={s.textArea}></div>
+        <div className={s.messagesArea}>
+          <div className={s.area}>{
+            data.messages.map( item => 
+            <Message date={data.date} name={data.name} message={item}/>
+            )}</div>
+        </div>
+        <div className={s.textArea}>
+          <div className={s.docs}></div>
+          <textarea name="" id="" placeholder="Write a message"></textarea>
+          <button>Send</button>
+        </div>
       </div>
       <div className={s.secondColumn}>
         <Chats />

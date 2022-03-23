@@ -25,7 +25,6 @@ const MyPosts = (props) => {
   function submitPost(e) {
     if (!props.newPostText) return;
     let action = addPostActionCreator()
-    
     props.dispatch(action)
   }
 
@@ -35,8 +34,9 @@ const MyPosts = (props) => {
     let action = updatePostStateActionCreator(text)
     
     props.dispatch(action);
+    
   };
-
+  
   return (
     <div>
       <div className={s.wrapper}>

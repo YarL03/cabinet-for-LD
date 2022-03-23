@@ -108,7 +108,8 @@ let store = {
         {id: 2, myMessages: ["122332111111111111111111111111111111111111111111111111111111111111111"], messages: ["Hey, buddy! Your project is pretty good"], name: "Yaroslav Labetsky", date: `${new Date().getHours()}:${new Date().getMinutes()}`},
         {id: 3, myMessages: ["123"], messages: ["Hey, how are you doing?", "I love you", "Hugs"], name: "Victoria Mongush", date: `14:53`},
         {id: 4, myMessages: ["124"], messages: ["Yeah, exactly"], name: "Vladimir Uvarov", date: `10:28`},
-      ]
+      ],
+      newMessageText: "",
     }
   },
 
@@ -133,13 +134,35 @@ let store = {
       this._callSubscriber(this._state);
   },
 
+  _addMessage(data) {
+    
+    data.messages.push(this._state.messagesPage.newMessageText)
+    this._state.messagesPage.newMessageText = ''
+
+    this._callSubscriber(this._state)
+  },
+
+  _updateMessageState(text) {
+    this._state.messagesPage.newMessageText = text
+    this._callSubscriber(this._state)
+  },
+
   dispatch(action) {
     if (action.type === 'ADD-POST') {
       this._addPost()
+      return
     }
-    else if (action.type === 'UPDATE-POST-STATE') {
-      
+    if (action.type === 'UPDATE-POST-STATE') {
       this._updatePostState(action.text)
+      return
+    }
+    if (action.type === 'UPDATE-MESSAGE-STATE') {
+      this._updateMessageState(action.text)
+      return
+    }
+    if (action.type === 'ADD-MESSAGE') {
+      this._addMessage(action.data)
+      return
     }
   },
 
@@ -158,6 +181,16 @@ export const addPostActionCreator = () => ({
 
 export const updatePostStateActionCreator = (text) => ({
   type: 'UPDATE-POST-STATE',
+  text: text
+})
+
+export const addMessageActionCreator = (data) => ({
+  type: 'ADD-MESSAGE',
+  data: data
+})
+
+export const updateMessageStateActionCreator = (text) => ({
+  type: 'UPDATE-MESSAGE-STATE',
   text: text
 })
 

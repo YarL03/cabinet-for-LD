@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useParams } from "react-router-dom";
+import { addMessageActionCreator, updateMessageStateActionCreator } from "../../../redux/state";
 import UserImg from "../../СrosspageComponents/UserImg";
 import { Chats } from "../Chats/Chats";
 import s from "./Dialog.module.css";
@@ -9,6 +10,21 @@ export const Dialog = (props) => {
   const {id} = useParams()
   const data = props.dialogsData.filter(item => item.id == id)[0]
   console.log(data)
+
+  const textMessage = useRef()
+
+  const submitMessage = () => {
+    if(!props.newMessageText) return
+    let action = addMessageActionCreator(data)
+    props.dispatch(action)
+  }
+
+  const onMessageChange = () => {
+    let text = textMessage.current.value
+    console.log(text)
+    let action = updateMessageStateActionCreator(text)
+    props.dispatch(action)
+  }
 
   return (
     <div className={s.dialog}>
@@ -59,8 +75,12 @@ export const Dialog = (props) => {
         </div>
         <div className={s.textArea}>
           <div className={s.docs}></div>
-          <textarea name="" id="" placeholder="Write a message"></textarea>
-          <button>Send</button>
+          <textarea placeholder='Write a message'
+          value={props.newMessageText}
+          ref={textMessage}
+          onChange={onMessageChange}
+          ></textarea>
+          <button onClick={submitMessage}>Send</button>
         </div>
       </div>
       <div className={s.secondColumn}>

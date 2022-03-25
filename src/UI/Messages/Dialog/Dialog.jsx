@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import { addMessageActionCreator, updateMessageStateActionCreator } from "../../../redux/state";
+import { addMessageActionCreator, updateMessageStateActionCreator } from "../../../redux/messsages-reducer";
 import UserImg from "../../СrosspageComponents/UserImg";
 import { Chats } from "../Chats/Chats";
 import s from "./Dialog.module.css";
@@ -11,7 +11,7 @@ export const Dialog = (props) => {
   const data = props.dialogsData.filter(item => item.id == id)[0]
   console.log(data)
 
-  const textMessage = useRef()
+  
 
   const submitMessage = () => {
     if(!props.newMessageText) return
@@ -19,8 +19,8 @@ export const Dialog = (props) => {
     props.dispatch(action)
   }
 
-  const onMessageChange = () => {
-    let text = textMessage.current.value
+  const onMessageChange = (e) => {
+    let text = e.target.value
     console.log(text)
     let action = updateMessageStateActionCreator(text)
     props.dispatch(action)
@@ -77,7 +77,6 @@ export const Dialog = (props) => {
           <div className={s.docs}></div>
           <textarea placeholder='Write a message'
           value={props.newMessageText}
-          ref={textMessage}
           onChange={onMessageChange}
           ></textarea>
           <button onClick={submitMessage}>Send</button>

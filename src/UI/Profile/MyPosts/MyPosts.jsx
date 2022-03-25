@@ -1,12 +1,10 @@
-import React, { useRef } from "react";
-import { addPostActionCreator, updatePostStateActionCreator } from "../../../redux/state";
+import React from "react";
+import { addPostActionCreator, updatePostStateActionCreator } from "../../../redux/profile-reducer";
 import UserImg from "../../СrosspageComponents/UserImg";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
-  
-  let textPost = useRef();
 
   function addButton() {
     document.querySelector(`#postButtons`).style.display = "block";
@@ -28,8 +26,8 @@ const MyPosts = (props) => {
     props.dispatch(action)
   }
 
-  const onPostChange = () => {
-    let text = textPost.current.value;
+  const onPostChange = (e) => {
+    let text = e.target.value;
     console.log(text);
     let action = updatePostStateActionCreator(text)
     
@@ -45,7 +43,6 @@ const MyPosts = (props) => {
         </div>
         <div className={s.wrapperPost}>
           <textarea
-            ref={textPost}
             id="postArea"
             onKeyDown={resizePostArea}
             onFocus={addButton}

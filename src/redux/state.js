@@ -2,6 +2,9 @@ import BriefcaseSVG from "../UI/Main/svg/BriefcaseSVG";
 import ChatBubblesSVG from "../UI/Main/svg/ChatBubblesSVG";
 import EyeSVG from "../UI/Main/svg/EyeSVG";
 import MagnifierSVG from "../UI/Main/svg/MagnifierSVG";
+import mainReducer from "./main-reducer";
+import messagesReducer from "./messsages-reducer";
+import profileReducer from "./profile-reducer";
 
 let store = {
   _state: {
@@ -115,55 +118,13 @@ let store = {
 
   _callSubscriber() {},
 
-  _addPost() {
-    let newPost = {
-      id: Date.now(),
-      message: this._state.profilePage.newPostText,
-      likeAmount: "",
-    };
-
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPostText = "";
-    
-    this._callSubscriber(this._state);
-  },
-
-  _updatePostState(text) {
-    
-    this._state.profilePage.newPostText = text;
-      this._callSubscriber(this._state);
-  },
-
-  _addMessage(data) {
-    
-    data.messages.push(this._state.messagesPage.newMessageText)
-    this._state.messagesPage.newMessageText = ''
-
-    this._callSubscriber(this._state)
-  },
-
-  _updateMessageState(text) {
-    this._state.messagesPage.newMessageText = text
-    this._callSubscriber(this._state)
-  },
-
   dispatch(action) {
-    if (action.type === 'ADD-POST') {
-      this._addPost()
-      return
-    }
-    if (action.type === 'UPDATE-POST-STATE') {
-      this._updatePostState(action.text)
-      return
-    }
-    if (action.type === 'UPDATE-MESSAGE-STATE') {
-      this._updateMessageState(action.text)
-      return
-    }
-    if (action.type === 'ADD-MESSAGE') {
-      this._addMessage(action.data)
-      return
-    }
+
+    this._state.profilePage = profileReducer(this._state.profilePage, action)
+    this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
+    this._state.mainPage = mainReducer(this._state.mainPage, action)
+
+    this._callSubscriber(this._state)
   },
 
   subscribe(observer) {
@@ -175,23 +136,5 @@ let store = {
   },
 };
 
-export const addPostActionCreator = () => ({
-  type: 'ADD-POST'
-})
-
-export const updatePostStateActionCreator = (text) => ({
-  type: 'UPDATE-POST-STATE',
-  text: text
-})
-
-export const addMessageActionCreator = (data) => ({
-  type: 'ADD-MESSAGE',
-  data: data
-})
-
-export const updateMessageStateActionCreator = (text) => ({
-  type: 'UPDATE-MESSAGE-STATE',
-  text: text
-})
 
 export default store;

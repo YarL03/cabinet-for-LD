@@ -8,7 +8,7 @@ export const Messages = (props) => {
     return (
         <div className={s.messages}>
             <div className={s.firstColumn}>
-            <Dialogs dialogs={props.messagesPage.dialogs}/>
+            <Dialogs store={props.store}/>
                 
             
             </div>

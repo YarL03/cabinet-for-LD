@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { addMessageActionCreator, updateMessageStateActionCreator } from "../../../redux/messsages-reducer";
 import UserImg from "../../СrosspageComponents/UserImg";
 import { Chats } from "../Chats/Chats";
 import s from "./Dialog.module.css";
@@ -8,22 +7,17 @@ import { Message } from "./Message/Message";
 
 export const Dialog = (props) => {
   const {id} = useParams()
-  const data = props.dialogsData.filter(item => item.id == id)[0]
-  console.log(data)
+  const data = props.dialogs.filter(item => item.id == id)[0] // ВАЖНО
 
-  
-
-  const submitMessage = () => {
+  const addMessage = () => {
     if(!props.newMessageText) return
-    let action = addMessageActionCreator(data)
-    props.dispatch(action)
+    props.addMessage(id)
   }
 
   const onMessageChange = (e) => {
     let text = e.target.value
     console.log(text)
-    let action = updateMessageStateActionCreator(text)
-    props.dispatch(action)
+    props.updateMessageText(text)
   }
 
   return (
@@ -79,7 +73,7 @@ export const Dialog = (props) => {
           value={props.newMessageText}
           onChange={onMessageChange}
           ></textarea>
-          <button onClick={submitMessage}>Send</button>
+          <button onClick={addMessage}>Send</button>
         </div>
       </div>
       <div className={s.secondColumn}>

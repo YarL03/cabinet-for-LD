@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Profile.module.css";
-import MyPosts from "./MyPosts/MyPosts";
 import { NavLink } from "react-router-dom";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 const Profile = (props) => {
  
@@ -49,9 +49,7 @@ const Profile = (props) => {
           </div>
           <div className="counts"></div>
         </div>
-        <MyPosts posts={props.profilePage.posts} 
-        newPostText={props.profilePage.newPostText}
-        dispatch={props.dispatch}/>
+        <MyPostsContainer/>
       </div>
       <div className={s.thirdColumn}>asdas</div>
     </div>

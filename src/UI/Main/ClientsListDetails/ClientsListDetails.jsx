@@ -1,9 +1,9 @@
 import React from "react";
 import ClientDetails from "./ClientDetails/ClientDetails";
 import s from './ClientsListDetails.module.css'
-import OnlineUser from "./OnlineUser/OnlineUser";
+import OnlineUsers from "./OnlineUser/OnlineUsers";
 
-const ClientsListDetails = ({clients, onlineUsers}) => {
+const ClientsListDetails = (props) => {
     return (
         <div className={s.details}>
             <div className={s.recentActivities}>
@@ -21,9 +21,7 @@ const ClientsListDetails = ({clients, onlineUsers}) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {clients.map(client => 
-                            <ClientDetails client={client} key={client.id}/>    
-                        )}
+                            <ClientDetails clients={props.clients} setClients={props.setClients}/>    
                     </tbody>
                 </table>
             </div>
@@ -34,11 +32,9 @@ const ClientsListDetails = ({clients, onlineUsers}) => {
                 </div>
                 <div className={s.tableWrapper}>
                 <table>
-                    {onlineUsers.map(onlineUser => (
-                        <OnlineUser name={onlineUser.name} surname={onlineUser.surname}/>
-                    ))}
-                    
-                    
+                    <tbody>
+                        <OnlineUsers onlineUsers={props.onlineUsers} setOnlineUsers={props.setOnlineUsers}/>
+                    </tbody>
                 </table>
                 </div>
             </div>

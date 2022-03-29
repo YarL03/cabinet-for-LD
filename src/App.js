@@ -7,6 +7,7 @@ import Main from "./UI/Main/Main";
 import { Messages } from "./UI/Messages/Messages";
 import { Layout } from "./UI/Layout/Layout";
 import { DialogContainer } from "./UI/Messages/Dialog/DialogContainer";
+import MainContainer from "./UI/Main/MainContainer";
 
 function App(props) {
   
@@ -14,7 +15,7 @@ function App(props) {
     <div className="App">
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Main mainPage={props.store.getState().mainPage} />} />
+          <Route index element={<MainContainer/>} />
           <Route
             path="profile"
             element={

@@ -42,7 +42,7 @@ export const addPostActionCreator = () => ({
   
   export const updatePostStateActionCreator = (text) => ({
     type: 'UPDATE-POST-STATE',
-    text: text
+    text,
   })
 
 export default profileReducer

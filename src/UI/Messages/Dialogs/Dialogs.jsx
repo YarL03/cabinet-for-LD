@@ -7,7 +7,7 @@ export const Dialogs = ({store}) => {
         <>
             {store.getState().messagesPage.dialogs.map(dialog => (
                 <Link to={`${dialog.id}`}>
-                    <DialogItem messages={dialog.messages} name={dialog.name} date={dialog.date}/>
+                    <DialogItem key={dialog.id} messages={dialog.messages} name={dialog.name} date={dialog.date}/>
                 </Link>
             ))}
         </>

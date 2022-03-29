@@ -3,6 +3,10 @@ import ChatBubblesSVG from "../UI/Main/svg/ChatBubblesSVG"
 import EyeSVG from "../UI/Main/svg/EyeSVG"
 import MagnifierSVG from "../UI/Main/svg/MagnifierSVG"
 
+const SET_CARDS = 'SET_CARDS'
+const SET_USERS = 'SET_USERS'
+const SET_CLIENTS = 'SET_CLIENTS'
+
 let initialState = {
     cards: [
         { numbers: "123", name: "Daily viewers", svg: <EyeSVG />, id: 3 },
@@ -20,83 +24,39 @@ let initialState = {
           id: 6,
         },
       ],
-      clients: [
-        {
-          name: "Ivan Ivanov",
-          kindOfLaw: "Civil Law",
-          date: "27.02.2022",
-          status: "Resolved",
-          style: "#8de02c",
-          id: 10,
-        },
-        {
-          name: "Ivan Ivanov",
-          kindOfLaw: "Civil Law",
-          date: "20.02.2022",
-          status: "Waiting",
-          style: "#f9ca3f",
-          id: 11,
-        },
-        {
-          name: "Ivan Ivanov",
-          kindOfLaw: "Land Law",
-          date: "15.02.2022",
-          status: "Resolved",
-          style: "#8de02c",
-          id: 12,
-        },
-        {
-          name: "Ivan Ivanov",
-          kindOfLaw: "Civil Law",
-          date: "27.02.2022",
-          status: "In progress",
-          style: "#1795c1",
-          id: 13,
-        },
-        {
-          name: "Ivan Ivanov",
-          kindOfLaw: "Civil Law",
-          date: "09.02.2022",
-          status: "Rejected",
-          style: "#f00",
-          id: 14,
-        },
-        {
-          name: "Ivan Ivanov",
-          kindOfLaw: "Land Law",
-          date: "12.02.2022",
-          status: "Resolved",
-          style: "#8de02c",
-          id: 15,
-        },
-        {
-          name: "Ivan Ivanov",
-          kindOfLaw: "Civil Law",
-          date: "27.02.2022",
-          status: "Resolved",
-          style: "#8de02c",
-          id: 16,
-        },
-      ],
-      onlineUsers: [
-        { id: 1, name: "Yaroslav", surname: "Labetsky" },
-        { id: 1, name: "David", surname: "Italy" },
-        { id: 1, name: "Ivan", surname: "Ivanov" },
-        { id: 1, name: "David", surname: "Italy" },
-        { id: 1, name: "David", surname: "Italy" },
-        { id: 1, name: "Yaroslav", surname: "Labetsky" },
-        { id: 1, name: "David", surname: "Italy" },
-        { id: 1, name: "David", surname: "Italy" },
-        { id: 1, name: "David", surname: "Italy" },
-        { id: 1, name: "David", surname: "Italy" },
-        { id: 1, name: "David", surname: "Italy" },
-      ],
+      clients: [],
+      onlineUsers: [],
 }
 
 const mainReducer = (state = initialState, action) => {
 
+  switch(action.type) {
+    case SET_CARDS: 
+      return {...state, cards: [...state.cards, ...action.cards]}
 
-    return state
+    case SET_USERS: 
+      return {...state, onlineUsers: [...state.onlineUsers, ...action.onlineUsers]}
+  
+    case SET_CLIENTS: 
+      return {...state, clients: [...state.clients, ...action.clients]}
+
+    default: return state
+  }
 }
+
+export const setCardsAC = (cards) => ({
+  type: SET_CARDS,
+  cards
+})
+
+export const setOnlineUsersAC = (onlineUsers) => ({
+  type: SET_USERS, 
+  onlineUsers,
+})
+
+export const setClientsAC = (clients) => ({
+  type: SET_CLIENTS,
+  clients
+})
 
 export default mainReducer

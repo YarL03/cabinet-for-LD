@@ -20,17 +20,19 @@ const messagesReducer = (state = initialState, action) => {
         }
         }
         case ADD_MESSAGE: {
-          
           let stateCopy = {...state,
-            dialogs: [...state.dialogs]
+            dialogs: state.dialogs.map(item => {
+              if (item.id === action.id) {
+                return {...item, messages: [...item.messages, state.newMessageText]}
+              }
+              return {...item}
+            }),
           }
-          stateCopy.dialogs[action.id] = {...state.dialogs[action.id]}
-          stateCopy.dialogs[action.id].messages = [...state.dialogs[action.id].messages, stateCopy.newMessageText]
           
           stateCopy.newMessageText = ''
           
         return stateCopy
-        }
+      }
         default: return state
       }
       
@@ -39,12 +41,12 @@ const messagesReducer = (state = initialState, action) => {
 
 export const addMessageActionCreator = (id) => ({
   type: 'ADD-MESSAGE',
-  id: id-1
+  id,
 })
 
 export const updateMessageStateActionCreator = (text) => ({
   type: 'UPDATE-MESSAGE-STATE',
-  text: text
+  text,
 })
 
 export default messagesReducer

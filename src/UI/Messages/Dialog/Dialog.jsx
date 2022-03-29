@@ -6,12 +6,12 @@ import s from "./Dialog.module.css";
 import { Message } from "./Message/Message";
 
 export const Dialog = (props) => {
-  const {id} = useParams()
-  const data = props.dialogs.filter(item => item.id == id)[0] // ВАЖНО
+  const {id} = useParams() // Я в шоке: тут приходит строка, а я даже не знал об этом
+  const data = props.dialogs.filter(item => item.id === +id)[0] // ВАЖНО
 
   const addMessage = () => {
     if(!props.newMessageText) return
-    props.addMessage(id)
+    props.addMessage(+id)
   }
 
   const onMessageChange = (e) => {
@@ -63,8 +63,8 @@ export const Dialog = (props) => {
         </div>
         <div className={s.messagesArea}>
           <div className={s.area}>{
-            data.messages.map( item => 
-            <Message date={data.date} name={data.name} message={item}/>
+            data.messages.map( (item, index) => 
+            <Message key={index} date={data.date} name={data.name} message={item}/>
             )}</div>
         </div>
         <div className={s.textArea}>

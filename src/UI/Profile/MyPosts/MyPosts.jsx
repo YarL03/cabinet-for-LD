@@ -43,8 +43,8 @@ const MyPosts = (props) => {
           </button>
         </div>
       </div>
-      {props.posts.map((post) => (
-        <Post message={post.message} likeAmount={post.likeAmount} />
+      {props.posts.map((post, index) => (
+        <Post key={index} message={post.message} likeAmount={post.likeAmount} />
       ))}
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Profile.module.css";
 import { NavLink } from "react-router-dom";
-import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import MyPosts from "./MyPosts/MyPosts";
 
 const Profile = (props) => {
  
@@ -26,15 +26,15 @@ const Profile = (props) => {
           <div className={s.pageInfo}>
             <div className={s.pageTop}>
               <div className={s.pageStatus}>
-                <div className={s.online}>online</div>
+                <div className={s.online}>{props.authorizedUser.status}</div>
               </div>
-              <h1 className="pageName">Ivan Ivanov</h1>
+              <h1 className={s.pageName}>{`${props.authorizedUser.name} ${props.authorizedUser.surname}`}</h1>
             </div>
             <div className={s.pageInfoShort}>
               <div className={s.profileInfo}>
                 <div className={s.infoRow}>
                   <h3 className={s.label}>Current city:</h3>
-                  <div className={s.labeled}>Minsk</div>
+                  <div className={s.labeled}>{props.authorizedUser.currentCity}</div>
                 </div>
                 <div className={s.showMore}>
                   <a>
@@ -49,7 +49,8 @@ const Profile = (props) => {
           </div>
           <div className="counts"></div>
         </div>
-        <MyPostsContainer/>
+        <MyPosts posts={props.posts} newPostText={props.newPostText} setLike={props.setLike}
+         addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
       </div>
       <div className={s.thirdColumn}>asdas</div>
     </div>

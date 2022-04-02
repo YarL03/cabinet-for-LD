@@ -67,6 +67,10 @@
     color: var(--white);
 }
 
+.pageName {
+    font-size: 20px;
+}
+
 .pageInfo {
     box-shadow: 0 7px 25px rgba(0,0,0,0.25);
     padding: 15px;

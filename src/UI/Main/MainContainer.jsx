@@ -1,11 +1,16 @@
 import { connect } from "react-redux";
-import { setCardsAC, setClientsAC, setOnlineUsersAC } from "../../redux/main-reducer";
+import { setCardsAC, setAllClientsAC, setOnlineUsersAC, setCurrentClientsAC, setTotalClientsAmountAC, setViewAllClientsAC, setCurrentPageAC } from "../../redux/main-reducer";
 import Main from "./Main";
 
 const mapStateToProps = (state) => ({
     cards: state.mainPage.cards,
-    clients: state.mainPage.clients,
-    onlineUsers: state.mainPage.onlineUsers
+    currentClients: state.mainPage.currentClients,
+    onlineUsers: state.mainPage.onlineUsers,
+    currentPage: state.mainPage.currentPage,
+    allClients: state.mainPage.allClients,
+    totalClientsAmount: state.mainPage.totalClientsAmount,
+    pageSize: state.mainPage.pageSize,
+    viewAllPressed: state.mainPage.viewAllPressed,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -13,8 +18,24 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(setCardsAC(cards))
     },
 
-    setClients: (clients) => {
-        dispatch(setClientsAC(clients))
+    setAllClients: (allClients) => {
+        dispatch(setAllClientsAC(allClients))
+    },
+
+    setTotalClientsAmount: (amount) => {
+        dispatch(setTotalClientsAmountAC(amount))
+    },
+
+    setCurrentClients: (currentClients) => {
+        dispatch(setCurrentClientsAC(currentClients))
+    },
+
+    setCurrentPage: (currentPage) => {
+        dispatch(setCurrentPageAC(currentPage))
+    },
+
+    setViewAllClients: ({currentClients, viewAllPressed}) => {
+      dispatch(setViewAllClientsAC({currentClients, viewAllPressed}))
     },
 
     setOnlineUsers: (onlineUsers) => {

@@ -5,7 +5,11 @@ import MagnifierSVG from "../UI/Main/svg/MagnifierSVG"
 
 const SET_CARDS = 'SET_CARDS'
 const SET_USERS = 'SET_USERS'
-const SET_CLIENTS = 'SET_CLIENTS'
+const SET_ALL_CLIENTS = 'SET_ALL_CLIENTS'
+const SET_CURRENT_CLIENTS = 'SET_CURRENT_CLIENTS'
+const SET_VIEW_ALL_CLIENTS = 'SET_VIEW_ALL_CLIENTS'
+const SET_TOTAL_CLIENTS_AMOUNT = 'SET_TOTAL_CLIENTS_AMOUNT'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 
 let initialState = {
     cards: [
@@ -24,8 +28,13 @@ let initialState = {
           id: 6,
         },
       ],
-      clients: [],
+      allClients: [],
+      currentClients: [],
+      totalClientsAmount: 0,
+      currentPage: 1,
       onlineUsers: [],
+      pageSize: 10,
+      viewAllPressed: false,
 }
 
 const mainReducer = (state = initialState, action) => {
@@ -37,8 +46,20 @@ const mainReducer = (state = initialState, action) => {
     case SET_USERS: 
       return {...state, onlineUsers: [...state.onlineUsers, ...action.onlineUsers]}
   
-    case SET_CLIENTS: 
-      return {...state, clients: [...state.clients, ...action.clients]}
+    case SET_ALL_CLIENTS: 
+      return {...state, allClients: [...state.allClients, ...action.allClients]}
+
+    case SET_TOTAL_CLIENTS_AMOUNT: 
+      return {...state, totalClientsAmount: action.amount}
+
+    case SET_CURRENT_CLIENTS:
+      return {...state, currentClients: [...action.currentClients]}
+
+    case SET_CURRENT_PAGE: 
+      return {...state, currentPage: action.currentPage}
+
+    case SET_VIEW_ALL_CLIENTS: 
+      return {...state, currentClients: [...action.currentClients], viewAllPressed: action.viewAllPressed}  
 
     default: return state
   }
@@ -54,9 +75,30 @@ export const setOnlineUsersAC = (onlineUsers) => ({
   onlineUsers,
 })
 
-export const setClientsAC = (clients) => ({
-  type: SET_CLIENTS,
-  clients
+export const setAllClientsAC = (allClients) => ({
+  type: SET_ALL_CLIENTS,
+  allClients
+})
+
+export const setCurrentClientsAC = (currentClients) => ({
+  type: SET_CURRENT_CLIENTS,
+  currentClients
+})
+
+export const setTotalClientsAmountAC = (amount) => ({
+  type: SET_TOTAL_CLIENTS_AMOUNT,
+  amount
+})
+
+export const setCurrentPageAC = (currentPage) => ({
+  type: SET_CURRENT_PAGE,
+  currentPage
+})
+
+export const setViewAllClientsAC = ({currentClients, viewAllPressed}) => ({
+  type: SET_VIEW_ALL_CLIENTS, //debug
+  currentClients,
+  viewAllPressed
 })
 
 export default mainReducer

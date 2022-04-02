@@ -1,13 +1,12 @@
 import React from "react";
-import Profile from "./UI/Profile/Profile";
 
 import "./styles/App.css";
 import { Route, Routes } from "react-router-dom";
-import Main from "./UI/Main/Main";
 import { Messages } from "./UI/Messages/Messages";
 import { Layout } from "./UI/Layout/Layout";
 import { DialogContainer } from "./UI/Messages/Dialog/DialogContainer";
 import MainContainer from "./UI/Main/MainContainer";
+import ProfileContainer from "./UI/Profile/ProfileContainer";
 
 function App(props) {
   
@@ -19,7 +18,7 @@ function App(props) {
           <Route
             path="profile"
             element={
-              <Profile/>
+              <ProfileContainer/>
             }
           />
           <Route

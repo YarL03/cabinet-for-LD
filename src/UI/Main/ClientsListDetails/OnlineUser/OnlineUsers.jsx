@@ -1,6 +1,6 @@
 import * as axios from "axios";
 import React from "react";
-import s from './OnlineUser.module.css'
+import s from './OnlineUsers.module.css'
 
 class OnlineUsers extends React.Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class OnlineUsers extends React.Component {
     componentDidMount() {
         axios.get('https://...').then(response => alert(response))
         .catch(error => {
-            alert(error)
+            console.log(error)
             this.props.setOnlineUsers([
                 { id: 1, name: "Yaroslav", surname: "Labetsky" },
                 { id: 2, name: "David", surname: "Italy" },

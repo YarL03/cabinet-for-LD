@@ -48,7 +48,7 @@ textarea::-webkit-scrollbar {
     padding: 2px 10px;
     border-color: var(--blue);
     border-radius: 6px;
-    cursor: pointer;
     color: var(--white);
     float: right;
+    cursor: pointer;
 }

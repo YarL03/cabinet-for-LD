@@ -6,6 +6,10 @@
     overflow: hidden;
 }
 
+.tr {
+    border-radius: 30px;
+}
+
 .imgBx img {
     position: absolute;
     top: 0;

@@ -4,7 +4,7 @@ import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
-  
+ 
   function resizePostArea(e) {
     document.querySelector("#postArea").style.height = `63px`;
     let scHeight = e.target.scrollHeight;
@@ -44,7 +44,7 @@ const MyPosts = (props) => {
         </div>
       </div>
       {props.posts.map((post, index) => (
-        <Post key={index} message={post.message} likeAmount={post.likeAmount} />
+        <Post key={index} setLike={props.setLike} post={post} />
       ))}
     </div>
   );

@@ -11,7 +11,12 @@ const Main = (props) => {
         <div>
         <CardList cards={props.cards}/>
         <Charts/>
-        <ClientsListDetails clients={props.clients} onlineUsers={props.onlineUsers} setOnlineUsers={props.setOnlineUsers} setClients={props.setClients}/>
+        <ClientsListDetails currentClients={props.currentClients} onlineUsers={props.onlineUsers} 
+        setOnlineUsers={props.setOnlineUsers} setAllClients={props.setAllClients}
+        setCurrentClients={props.setCurrentClients} setTotalClientsAmount={props.setTotalClientsAmount}
+        setViewAllClients={props.setViewAllClients} setCurrentPage={props.setCurrentPage}
+
+        other={props}/>
         </div>
     )
 }

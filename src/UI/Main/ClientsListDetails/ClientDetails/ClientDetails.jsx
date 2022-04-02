@@ -3,15 +3,24 @@ import React from "react";
 import s from "./ClientDetails.module.css";
 
 class ClientDetails extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
   componentDidMount() {
-    axios.get('https://...').then(response => response)
+    axios.get('https://jsonplaceholder.typicode.com/users').then(response => { //https://jsonplaceholder.typicode.com/users
+      let statuses = [{status: 'Resolved', style: "#8de02c"}, {status: 'Waiting', style: "#f9ca3f"}, {status: 'In progress', style: "#1795c1"}, {status: 'Rejected', style: "#f00"}]
+      let kindsOfLaw = ["Civil Law", "Land Law"]
+      let allClients = response.data.map(item => {
+        return {...item, ...statuses[Math.floor(Math.random()*statuses.length)],
+           kindOfLaw: kindsOfLaw[Math.floor(Math.random()*kindsOfLaw.length)],
+          date: new Date().toLocaleDateString()}
+      })
+      this.props.setAllClients(allClients)
+      this.props.setTotalClientsAmount(allClients.length)
+      if(this.props.currentClients.length === 0) this.props.setCurrentClients(allClients.slice(allClients.length-8).reverse())
+
+    console.log(response)})
     .catch(error => {
       console.log(error)
-      this.props.setClients([
+      this.props.setAllClients([
       {
         name: "Ivan Ivanov",
         kindOfLaw: "Civil Law",
@@ -68,13 +77,20 @@ class ClientDetails extends React.Component {
         style: "#8de02c",
         id: 16,
       },
+      {
+        name: "Ivan Ivanov",
+        kindOfLaw: "Civil Law",
+        date: "27.02.2022",
+        status: "Resolved",
+        style: "#8de02c",
+        id: 17,
+      },
     ])
   })}
 
   render() {
-    
     return (
-      this.props.clients.map(item => 
+      this.props.currentClients.map(item => 
       <tr key={item.id}>
         <td>{item.name}</td>
         <td>{item.kindOfLaw}</td>

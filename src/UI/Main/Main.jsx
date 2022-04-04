@@ -1,7 +1,9 @@
 import React from "react";
 import CardList from "./CardList/CardList";
 import Charts from "./Charts/Charts";
-import ClientsListDetails from "./ClientsListDetails/ClientsListDetails";
+import RecentActitvitiesContainer from "./RecentActivitiesContainer/RecentActitvitiesContainer";
+
+
 
 
 const Main = (props) => {
@@ -11,10 +13,11 @@ const Main = (props) => {
         <div>
         <CardList cards={props.cards}/>
         <Charts/>
-        <ClientsListDetails currentClients={props.currentClients} onlineUsers={props.onlineUsers} 
+        <RecentActitvitiesContainer currentClients={props.currentClients} onlineUsers={props.onlineUsers} 
         setOnlineUsers={props.setOnlineUsers} setAllClients={props.setAllClients}
         setCurrentClients={props.setCurrentClients} setTotalClientsAmount={props.setTotalClientsAmount}
         setViewAllClients={props.setViewAllClients} setCurrentPage={props.setCurrentPage}
+        toggleIsFetching={props.toggleIsFetching}
 
         other={props}/>
         </div>

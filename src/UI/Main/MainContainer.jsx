@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { setCardsAC, setAllClientsAC, setOnlineUsersAC, setCurrentClientsAC, setTotalClientsAmountAC, setViewAllClientsAC, setCurrentPageAC } from "../../redux/main-reducer";
+import { setCardsAC, setAllClientsAC, setOnlineUsersAC, setCurrentClientsAC, setTotalClientsAmountAC, setViewAllClientsAC, setCurrentPageAC, toggleIsFetchingAC } from "../../redux/main-reducer";
 import Main from "./Main";
 
 const mapStateToProps = (state) => ({
@@ -11,6 +11,7 @@ const mapStateToProps = (state) => ({
     totalClientsAmount: state.mainPage.totalClientsAmount,
     pageSize: state.mainPage.pageSize,
     viewAllPressed: state.mainPage.viewAllPressed,
+    isFetching: state.mainPage.isFetching
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -40,6 +41,10 @@ const mapDispatchToProps = (dispatch) => ({
 
     setOnlineUsers: (onlineUsers) => {
         dispatch(setOnlineUsersAC(onlineUsers))
+    },
+
+    toggleIsFetching: (isFetching) => {
+        dispatch(toggleIsFetchingAC(isFetching))
     }
 })
 

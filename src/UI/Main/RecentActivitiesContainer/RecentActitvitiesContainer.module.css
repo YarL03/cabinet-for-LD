@@ -11,22 +11,13 @@
     position: relative;
     min-height: 500px;
     background: var(--white);
-    padding: 20px;
+    padding: 20px 20px 40px 20px;
     box-shadow: 0 7px 25px rgba(0,0,0,0.35);
     border-radius: 20px;
     /* overflow-y:scroll; */
 }
 
-.cardHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
 
-.cardHeader h2 {
-    font-weight: 600;
-    color: var(--blue);
-}
 
 .btn {
     position: relative;
@@ -71,7 +62,7 @@
 }
 
 .details .recentActivities table tr td {
-    padding: 10px;
+    padding: 9px 10px;
 }
 
 .details .recentActivities table tr td:last-child {
@@ -86,49 +77,30 @@
     text-align: center;
 }
 
-.selectedPage {
-    font-weight: 600;
+.pagination {
+    position: absolute;
+    bottom: 0;
+    height: 20px;
+    margin-bottom: 15px;
+    border-radius: 6px;
 }
 
-.onlineUsers {
-    position: relative;
-    display: grid;
-    grid-template-rows: 40px 100%;
-    height: 500px;
-    background: var(--white);
-    padding: 20px;
-    box-shadow: 0 7px 25px rgba(0,0,0,0.35);
-    border-radius: 30px;
-}
-
-.onlineUsers .tableWrapper {
-    height: 400px;
-    overflow-y: scroll;
-}
-
-.onlineUsers .cardHeader {
-    border-bottom: 1px solid rgb(228, 225, 225) ;
-}
-
-.onlineUsers table {
-    display: flex;
-    flex-direction: column;
-    
-}
-
-.onlineUsers table tr td {
-    width: 100%;
-}
-
-.onlineUsers table tr:hover {
-    background:  var(--blue);
+.pagination span {
+    cursor: pointer;
+    padding: 1px 7px;
+    font-size: 18px;
     color: var(--white);
-    border-radius: 30px;
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 50%;
 }
 
-.onlineUsers table tr td {
-    padding: 12px 10px;
+.pagination .selectedPage {
+    font-weight: 700;
+    background-color: var(--white);
+    color: var(--blue);
 }
+
 
 @media (max-width: 768px) {
     .details {
@@ -140,8 +112,3 @@
     }
 }
 
-@media (max-width: 480px) {
-    .cardHeader h2 {
-        font-size: 20px;
-    }
-}

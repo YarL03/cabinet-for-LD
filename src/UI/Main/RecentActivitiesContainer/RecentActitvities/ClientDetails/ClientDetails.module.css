@@ -1,3 +1,8 @@
+table tbody tr:hover {
+    background: var(--blue);
+    color: var(--white);
+}
+
 .status  {
     padding: 2px 4px;
     color: var(--white);

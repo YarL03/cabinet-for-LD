@@ -10,6 +10,7 @@ const SET_CURRENT_CLIENTS = 'SET_CURRENT_CLIENTS'
 const SET_VIEW_ALL_CLIENTS = 'SET_VIEW_ALL_CLIENTS'
 const SET_TOTAL_CLIENTS_AMOUNT = 'SET_TOTAL_CLIENTS_AMOUNT'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'  
 
 let initialState = {
     cards: [
@@ -33,8 +34,9 @@ let initialState = {
       totalClientsAmount: 0,
       currentPage: 1,
       onlineUsers: [],
-      pageSize: 10,
+      pageSize: 8,
       viewAllPressed: false,
+      isFetching: true,
 }
 
 const mainReducer = (state = initialState, action) => {
@@ -53,13 +55,16 @@ const mainReducer = (state = initialState, action) => {
       return {...state, totalClientsAmount: action.amount}
 
     case SET_CURRENT_CLIENTS:
-      return {...state, currentClients: [...action.currentClients]}
+      return {...state, currentClients: action.currentClients}
 
     case SET_CURRENT_PAGE: 
       return {...state, currentPage: action.currentPage}
 
     case SET_VIEW_ALL_CLIENTS: 
-      return {...state, currentClients: [...action.currentClients], viewAllPressed: action.viewAllPressed}  
+      return {...state, viewAllPressed: action.viewAllPressed}
+      
+    case TOGGLE_IS_FETCHING:
+      return {...state, isFetching: action.isFetching} 
 
     default: return state
   }
@@ -95,10 +100,20 @@ export const setCurrentPageAC = (currentPage) => ({
   currentPage
 })
 
-export const setViewAllClientsAC = ({currentClients, viewAllPressed}) => ({
-  type: SET_VIEW_ALL_CLIENTS, //debug
-  currentClients,
+export const setViewAllClientsAC = (viewAllPressed) => ({
+  type: SET_VIEW_ALL_CLIENTS, 
   viewAllPressed
 })
+
+export const toggleIsFetchingAC = (isFetching) => ({
+  type: TOGGLE_IS_FETCHING,
+  isFetching
+})
+
+// export const setViewAllClientsAC = ({currentClients, viewAllPressed}) => ({
+//   type: SET_VIEW_ALL_CLIENTS, 
+//   currentClients,
+//   viewAllPressed
+// })
 
 export default mainReducer

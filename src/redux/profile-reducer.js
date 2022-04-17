@@ -58,16 +58,16 @@ const profileReducer = (state = initialState, action) => {
     
 }
 
-export const addPostActionCreator = () => ({
+export const setAddPost = () => ({
     type: 'ADD-POST'
   })
   
-  export const updatePostStateActionCreator = (text) => ({
+  export const setUpdatePostState = (text) => ({
     type: 'UPDATE-POST-STATE',
     text,
   })
 
-export const setLikeAC = ({isLiked, id}) => ({
+export const setLike = ({isLiked, id}) => ({
   type: 'SET_LIKE',
   isLiked,
   id

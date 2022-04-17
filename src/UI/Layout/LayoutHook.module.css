@@ -1,0 +1,7 @@
+.preloader {
+  position: absolute;
+  top: calc(50% - 20vh);
+  left: calc(50% - 20vw);
+  height: 40vh;
+  width: 40vw;
+}

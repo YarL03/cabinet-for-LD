@@ -12,6 +12,8 @@
   left: 80px;
 }
 
+.preloader {}
+
 @media (max-width: 991px) {
   .content-wrapper {
       width: 100%;

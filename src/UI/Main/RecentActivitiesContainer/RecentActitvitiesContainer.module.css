@@ -7,76 +7,6 @@
     grid-gap: 30px;
 }
 
-.recentActivities {
-    position: relative;
-    min-height: 500px;
-    background: var(--white);
-    padding: 20px 20px 40px 20px;
-    box-shadow: 0 7px 25px rgba(0,0,0,0.35);
-    border-radius: 20px;
-    /* overflow-y:scroll; */
-}
-
-
-
-.btn {
-    position: relative;
-    padding: 5px 10px;
-    background:  var(--blue);
-    color: var(--white);
-    border-radius: 6px;
-    border-color: var(--blue);
-    font-weight: 600;
-    font-size: 16px;
-}
-
-.details table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    position: relative;
-}
-
-.details table thead td {
-    font-weight: 600;
-}
-
-.details .recentActivities table tr {
-    font-weight: 500;
-    font-size: 1.1em;
-    color: var(--black1);
-    border-bottom: 1px solid rgba(0,0,0,0.15)
-}
-
-.details .recentActivities table tr:last-child {
-    border-bottom: none;
-}
-
-.details .recentActivities table tbody {
-    position: relative;
-}
-
-.details .recentActivities table tbody tr:hover {
-    background: var(--blue);
-    color: var(--white);
-}
-
-.details .recentActivities table tr td {
-    padding: 9px 10px;
-}
-
-.details .recentActivities table tr td:last-child {
-    text-align: end;
-}
-
-.details .recentActivities table tr td:nth-child(2) {
-    text-align: end;
-}
-
-.details .recentActivities table tr td:nth-child(3) {
-    text-align: center;
-}
-
 .pagination {
     position: absolute;
     bottom: 0;
@@ -106,9 +36,4 @@
     .details {
         grid-template-columns: repeat(1, 1fr);
     }
-
-    .recentActivities {
-        overflow-x: auto;
-    }
 }
-

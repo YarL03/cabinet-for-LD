@@ -11,15 +11,15 @@ const MyPosts = (props) => {
     document.querySelector("#postArea").style.height = `${scHeight}px`
   }
 
-  function addPost() {
+  function onAddPost() {
     if (!props.newPostText) return;
-    props.addPost()
+    props.setAddPost()
   }
 
   const onPostChange = (e) => {
     let text = e.target.value;
     console.log(text);
-    props.updateNewPostText(text)
+    props.setUpdatePostState(text)
   };
   
   return (
@@ -38,7 +38,7 @@ const MyPosts = (props) => {
           />
         </div>
         <div id="postButtons" className={s.postButtons}>
-          <button onClick={addPost} className={s.postSubmit}>
+          <button onClick={onAddPost} className={s.postSubmit}>
             Post
           </button>
         </div>

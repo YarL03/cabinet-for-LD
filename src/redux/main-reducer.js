@@ -1,3 +1,4 @@
+import { ClientsAPI} from "../api/api"
 import BriefcaseSVG from "../UI/Main/svg/BriefcaseSVG"
 import ChatBubblesSVG from "../UI/Main/svg/ChatBubblesSVG"
 import EyeSVG from "../UI/Main/svg/EyeSVG"
@@ -36,7 +37,7 @@ let initialState = {
       onlineUsers: [],
       pageSize: 8,
       viewAllPressed: false,
-      isFetching: true,
+      isFetching: null,
 }
 
 const mainReducer = (state = initialState, action) => {
@@ -70,50 +71,67 @@ const mainReducer = (state = initialState, action) => {
   }
 }
 
-export const setCardsAC = (cards) => ({
+export const setCards = (cards) => ({
   type: SET_CARDS,
   cards
 })
 
-export const setOnlineUsersAC = (onlineUsers) => ({
+export const setOnlineUsers = (onlineUsers) => ({
   type: SET_USERS, 
   onlineUsers,
 })
 
-export const setAllClientsAC = (allClients) => ({
+export const setAllClients = (allClients) => ({
   type: SET_ALL_CLIENTS,
   allClients
 })
 
-export const setCurrentClientsAC = (currentClients) => ({
+export const setCurrentClients = (currentClients) => ({
   type: SET_CURRENT_CLIENTS,
   currentClients
 })
 
-export const setTotalClientsAmountAC = (amount) => ({
+export const setTotalClientsAmount = (amount) => ({
   type: SET_TOTAL_CLIENTS_AMOUNT,
   amount
 })
 
-export const setCurrentPageAC = (currentPage) => ({
+export const setCurrentPage = (currentPage) => ({
   type: SET_CURRENT_PAGE,
   currentPage
 })
 
-export const setViewAllClientsAC = (viewAllPressed) => ({
+export const setViewAllClients = (viewAllPressed) => ({
   type: SET_VIEW_ALL_CLIENTS, 
   viewAllPressed
 })
 
-export const toggleIsFetchingAC = (isFetching) => ({
+export const toggleIsFetching = (isFetching) => ({
   type: TOGGLE_IS_FETCHING,
   isFetching
 })
 
-// export const setViewAllClientsAC = ({currentClients, viewAllPressed}) => ({
-//   type: SET_VIEW_ALL_CLIENTS, 
-//   currentClients,
-//   viewAllPressed
-// })
+export const getClients = (currentPage, pageSize) => (dispatch) => {
+  dispatch(setCurrentPage(currentPage))
+  dispatch(toggleIsFetching(true))
+      ClientsAPI.getClients(currentPage, pageSize).then(data => {
+        dispatch(toggleIsFetching(false))
+        let statuses = [{status: 'Resolved', style: "#8de02c"}, {status: 'Waiting', style: "#f9ca3f"}, 
+        {status: 'In progress', style: "#1795c1"}, {status: 'Rejected', style: "#f00"}]
+        let kindsOfLaw = ["Civil Law", "Land Law"]
+        let currentClients = data.items.map(item => {
+        return {...item, ...statuses[Math.floor(Math.random()*statuses.length)],
+           kindOfLaw: kindsOfLaw[Math.floor(Math.random()*kindsOfLaw.length)],
+          date: new Date().toLocaleDateString()}
+      }).reverse()
+      dispatch(setTotalClientsAmount(50))
+      dispatch(setCurrentClients(currentClients))
+})
+}
+
+export const getOnlineUsers = () => (dispatch) => {
+  ClientsAPI.getOnlineUsers().then(items => dispatch(setOnlineUsers(items)))
+}
+
 
 export default mainReducer

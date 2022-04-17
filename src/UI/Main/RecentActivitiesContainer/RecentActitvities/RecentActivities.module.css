@@ -5,7 +5,6 @@
     padding: 20px 20px 40px 20px;
     box-shadow: 0 7px 25px rgba(0,0,0,0.35);
     border-radius: 20px;
-    /* overflow-y:scroll; */
 }
 
 .cardHeader {
@@ -55,9 +54,11 @@ table thead td {
     position: relative;
 }
 
-.details .recentActivities table tbody tr:hover {
+
+.recentActivities table tbody tr:hover {
     background: var(--blue);
     color: var(--white);
+    border-radius: 30px;
 }
 
 .recentActivities table tr td {
@@ -76,32 +77,14 @@ table thead td {
     text-align: center;
 }
 
-.pagination {
-    position: absolute;
-    bottom: 0;
-    height: 20px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-}
-
-.pagination span {
-    cursor: pointer;
-    padding: 1px 7px;
-    font-size: 18px;
-    color: var(--white);
-    background: var(--blue);
-    border: 1px solid var(--blue);
-    border-radius: 50%;
-}
-
-.pagination .selectedPage {
-    font-weight: 700;
-    background-color: var(--white);
-    color: var(--blue);
-}
-
 .preloader {
     position: absolute;
     left: calc(50% - 100px);
     top: 75px;
+}
+
+@media (max-width: 768px) {
+    .recentActivities {
+        overflow-x: auto;
+    }
 }

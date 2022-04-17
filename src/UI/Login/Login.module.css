@@ -1,0 +1,25 @@
+.authorization {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    position: absolute;
+    left: 40%;
+    top: calc(50% - 35px);
+}
+
+.authorization button {
+    height: 25px;
+    width: 70px;
+    font-size: 15px;
+    position: relative;
+    left: calc(100% - 70px);
+}
+
+.authorization .text {
+    height: 35px;
+    font-size: 16px;
+}
+
+.authorization:nth-child(1) .text {
+    margin-bottom: 20px;
+}

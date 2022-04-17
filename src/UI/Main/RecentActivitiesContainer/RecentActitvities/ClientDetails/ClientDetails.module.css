@@ -1,7 +1,8 @@
-table tbody tr:hover {
+/* .clients:hover {
     background: var(--blue);
     color: var(--white);
-}
+    border-radius: 30px;
+} */
 
 .status  {
     padding: 2px 4px;

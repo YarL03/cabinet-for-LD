@@ -6,8 +6,7 @@ import RecentActitvitiesContainer from "./RecentActivitiesContainer/RecentActitv
 
 
 
-const Main = (props) => {
-    
+const Main = (props) => {  
 
     return (
         <div>
@@ -15,10 +14,9 @@ const Main = (props) => {
         <Charts/>
         <RecentActitvitiesContainer currentClients={props.currentClients} onlineUsers={props.onlineUsers} 
         setOnlineUsers={props.setOnlineUsers} setAllClients={props.setAllClients}
-        setCurrentClients={props.setCurrentClients} setTotalClientsAmount={props.setTotalClientsAmount}
-        setViewAllClients={props.setViewAllClients} setCurrentPage={props.setCurrentPage}
-        toggleIsFetching={props.toggleIsFetching}
-
+        setTotalClientsAmount={props.setTotalClientsAmount}
+        setViewAllClients={props.setViewAllClients} getClients={props.getClients}
+        getOnlineUsers={props.getOnlineUsers}
         other={props}/>
         </div>
     )

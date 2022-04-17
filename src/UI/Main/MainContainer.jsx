@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { setCardsAC, setAllClientsAC, setOnlineUsersAC, setCurrentClientsAC, setTotalClientsAmountAC, setViewAllClientsAC, setCurrentPageAC, toggleIsFetchingAC } from "../../redux/main-reducer";
+import { setCards, setAllClients, setTotalClientsAmount, setViewAllClients, getClients, getOnlineUsers } from "../../redux/main-reducer";
 import Main from "./Main";
 
 const mapStateToProps = (state) => ({
@@ -11,43 +11,51 @@ const mapStateToProps = (state) => ({
     totalClientsAmount: state.mainPage.totalClientsAmount,
     pageSize: state.mainPage.pageSize,
     viewAllPressed: state.mainPage.viewAllPressed,
-    isFetching: state.mainPage.isFetching
+    isFetching: state.mainPage.isFetching,
+    isAuth: state.auth.isAuth,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-    setCards: (cards) => {
-        dispatch(setCardsAC(cards))
-    },
+// const mapDispatchToProps = (dispatch) => ({
+//     setCards: (cards) => {
+//         dispatch(setCardsAC(cards))
+//     },
 
-    setAllClients: (allClients) => {
-        dispatch(setAllClientsAC(allClients))
-    },
+//     setAllClients: (allClients) => {
+//         dispatch(setAllClientsAC(allClients))
+//     },
 
-    setTotalClientsAmount: (amount) => {
-        dispatch(setTotalClientsAmountAC(amount))
-    },
+//     setTotalClientsAmount: (amount) => {
+//         dispatch(setTotalClientsAmountAC(amount))
+//     },
 
-    setCurrentClients: (currentClients) => {
-        dispatch(setCurrentClientsAC(currentClients))
-    },
+//     setCurrentClients: (currentClients) => {
+//         dispatch(setCurrentClientsAC(currentClients))
+//     },
 
-    setCurrentPage: (currentPage) => {
-        dispatch(setCurrentPageAC(currentPage))
-    },
+//     setCurrentPage: (currentPage) => {
+//         dispatch(setCurrentPageAC(currentPage))
+//     },
 
-    setViewAllClients: ({currentClients, viewAllPressed}) => {
-      dispatch(setViewAllClientsAC({currentClients, viewAllPressed}))
-    },
+//     setViewAllClients: ({currentClients, viewAllPressed}) => {
+//       dispatch(setViewAllClientsAC({currentClients, viewAllPressed}))
+//     },
 
-    setOnlineUsers: (onlineUsers) => {
-        dispatch(setOnlineUsersAC(onlineUsers))
-    },
+//     setOnlineUsers: (onlineUsers) => {
+//         dispatch(setOnlineUsersAC(onlineUsers))
+//     },
 
-    toggleIsFetching: (isFetching) => {
-        dispatch(toggleIsFetchingAC(isFetching))
-    }
-})
+//     toggleIsFetching: (isFetching) => {
+//         dispatch(toggleIsFetchingAC(isFetching))
+//     }
+// })
 
-const MainContainer = connect(mapStateToProps, mapDispatchToProps)(Main)
+const MainContainer = connect(mapStateToProps, {
+    setCards,
+    setAllClients,
+    setTotalClientsAmount,
+    setViewAllClients,
+    getClients,
+    getOnlineUsers,
+})(Main)
 
 export default MainContainer

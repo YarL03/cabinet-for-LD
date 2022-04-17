@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Header from "../Header/Header";
 import "./Layout.css"
 
 export const Layout = () => {
+
   return (
     <>
       <Header />

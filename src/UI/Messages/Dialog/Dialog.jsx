@@ -76,9 +76,9 @@ export const Dialog = (props) => {
           <button onClick={addMessage}>Send</button>
         </div>
       </div>
-      <div className={s.secondColumn}>
+      {/* <div className={s.secondColumn}>
         <Chats />
-      </div>
+      </div> */}
     </div>
   );
 };

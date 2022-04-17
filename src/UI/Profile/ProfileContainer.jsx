@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { addPostActionCreator, setLikeAC, updatePostStateActionCreator } from "../../redux/profile-reducer";
+import { setAddPost, setLike, setUpdatePostState } from "../../redux/profile-reducer";
 import Profile from "./Profile";
 
 const mapStateToProps = (state) => ({
@@ -8,16 +8,11 @@ const mapStateToProps = (state) => ({
   newPostText: state.profilePage.newPostText
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  updateNewPostText: (text) => {
-    dispatch(updatePostStateActionCreator(text))},
-
-  addPost: () => dispatch(addPostActionCreator()),
-
-  setLike: (isLiked) => dispatch(setLikeAC(isLiked)),
-})
-
-const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile)
+const ProfileContainer = connect(mapStateToProps, {
+  setUpdatePostState,
+  setAddPost,
+  setLike,
+})(Profile)
  
 
 export default ProfileContainer;

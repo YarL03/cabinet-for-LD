@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import s from "./Profile.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import MyPosts from "./MyPosts/MyPosts";
 
 const Profile = (props) => {
- 
+  const {id} = useParams()
+  useEffect(() => {}, [])
+  console.log(id)
   return (
     <div className={s.profile}>
       <div className="firstColumn">
@@ -50,7 +52,7 @@ const Profile = (props) => {
           <div className="counts"></div>
         </div>
         <MyPosts posts={props.posts} newPostText={props.newPostText} setLike={props.setLike}
-         addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
+         setAddPost={props.setAddPost} setUpdatePostState={props.setUpdatePostState}/>
       </div>
       <div className={s.thirdColumn}>asdas</div>
     </div>

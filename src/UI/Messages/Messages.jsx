@@ -8,7 +8,8 @@ export const Messages = (props) => {
     return (
         <div className={s.messages}>
             <div className={s.firstColumn}>
-            <Dialogs store={props.store}/>
+            {/* <Dialogs store={props.store}/> */}
+            <Outlet/>
                 
             
             </div>

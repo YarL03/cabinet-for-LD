@@ -9,7 +9,7 @@ let initialState = {
       login: null,
       email: null,
       isAuth: false,
-      isFetchingAuth: true,
+      isFetchingAuth: false,
 }
 
 const authReducer = (state = initialState, action) => {
@@ -45,7 +45,6 @@ export const setIsAuth = (isAuth) => ({
 })
 
 export const getIsAuth = () => (dispatch) => {
-  debugger
   AuthAPI.getIsAuth().then(data => {
     if (!data.resultCode) {
       dispatch(setIsAuth(!data.resultCode))

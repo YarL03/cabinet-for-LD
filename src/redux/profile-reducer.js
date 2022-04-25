@@ -1,6 +1,7 @@
 const ADD_POST = 'ADD-POST'
 const UPDATE_POST_STATE = 'UPDATE-POST-STATE'
 const SET_LIKE = 'SET_LIKE'
+const SET_STATUS = 'SET_STATUS'
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 let initialState = {
@@ -11,6 +12,7 @@ let initialState = {
     { id: 3, name:'Yaroslav', surname: 'Labetsky', message: "It's my first post here", likeAmount: 5, myLike: true, color: 'rgb(253, 99, 163)', date: `28 Nov 2022`},
   ],
   newPostText: "",
+  status: '',
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -52,6 +54,11 @@ const profileReducer = (state = initialState, action) => {
             return {...item}
           })}
         }
+
+        case SET_STATUS: {
+          debugger
+          return {...state, status: action.status}
+        }
           default: return state
     }
 
@@ -71,6 +78,11 @@ export const setLike = ({isLiked, id}) => ({
   type: 'SET_LIKE',
   isLiked,
   id
+})
+
+export const setStatus = (status) => ({
+  type: 'SET_STATUS',
+  status
 })
 
 export default profileReducer

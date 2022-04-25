@@ -2,9 +2,33 @@ import React, { useEffect, useState } from "react";
 import s from "./Profile.module.css";
 import { NavLink, useParams } from "react-router-dom";
 import MyPosts from "./MyPosts/MyPosts";
+import { useDispatch, useSelector } from "react-redux";
+import { setStatus } from "../../redux/profile-reducer";
 
 const Profile = (props) => {
+  const [editMode, setEditMode] = useState(false) 
+  const [statusValue, setStatusValue] = useState('')
+  const statusRedux = useSelector(state => state.profilePage.status)
   const {id} = useParams()
+  const dispatch = useDispatch()
+
+  const toggleEditMode = () => {
+    setEditMode(!editMode)
+  }
+
+  const updateStatusValue = (e) => {
+    let value = e.target.value
+    if(value.length >= 140) return
+    setStatusValue(e.target.value)
+  }
+
+  const submitStatusValue = (e) => {
+    e.preventDefault()
+    setEditMode(!editMode)
+    dispatch(setStatus(statusValue))
+    
+  }
+
   useEffect(() => {}, [])
   console.log(id)
   return (
@@ -31,6 +55,19 @@ const Profile = (props) => {
                 <div className={s.online}>{props.authorizedUser.status}</div>
               </div>
               <h1 className={s.pageName}>{`${props.authorizedUser.name} ${props.authorizedUser.surname}`}</h1>
+              <div className={s.status}>
+                {!editMode && 
+                <div className={s.defaultStatus} onClick={toggleEditMode}>{statusRedux || "установить статус"}</div>
+                }
+                {editMode &&
+                <div className={s.statusModal}>
+                  <form onSubmit={submitStatusValue}>
+                  <input autoFocus onChange={updateStatusValue} value={statusValue}/>
+                  <button type="submit">Сохранить</button>
+                  </form>
+                </div>
+                }
+              </div>
             </div>
             <div className={s.pageInfoShort}>
               <div className={s.profileInfo}>

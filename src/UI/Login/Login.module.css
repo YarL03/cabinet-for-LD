@@ -23,3 +23,10 @@
 .authorization:nth-child(1) .text {
     margin-bottom: 20px;
 }
+
+.preloader {
+    position: absolute;
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+    height: 200px;
+}

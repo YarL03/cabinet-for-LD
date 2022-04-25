@@ -130,3 +130,62 @@
     box-shadow: 0 7px 25px rgba(0,0,0,0.35);
     max-height: calc(100vh - 200px);
 }
+
+.status {
+    cursor: pointer;
+    color: #818c99;
+    font-size: 14px;
+    margin: 1px 0px -4px;
+    padding: 2px 0px 4px;
+}
+
+.status input {
+    height: 20px;
+    width: 100%;
+}
+
+.status .defaultStatus:hover {
+    background: #eceef0;
+}
+
+.status .statusModal {
+    
+    height: 50px;
+    background: var(--white);
+    margin: 5px 0 -10px;
+    
+    width: 100%;
+}
+
+.status .statusModal form {
+    width: 100%;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.status .statusModal input {
+    padding: 10px 5px;
+    border-radius: 5px;
+    border: 1px solid #bdbdbd;
+    outline: none;  
+}
+
+.status .statusModal input:focus {
+    border-color: var(--blue);
+}
+
+.status .statusModal button {
+    width: 80px;
+    margin: 10px 0px 5px 0;
+    background-color: var(--blue);
+    font-size: 12px;
+    font-weight: 300;
+    padding: 2px 0px;
+    border-color: var(--blue);
+    border-radius: 6px;
+    color: var(--white);
+    
+    cursor: pointer;
+}

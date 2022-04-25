@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { getIsAuth} from "../../redux/auth-reducer"
+import { getIsAuth } from "../../redux/auth-reducer"
 
 
 export const Initialization = ({children}) => {

@@ -24,3 +24,7 @@ export const AuthAPI = {
     getIsAuth: () => instance.get(`auth/me`)
         .then(response => response.data)
 }
+
+export const ProfileAPI = {
+    setStatus: () => instance.put(`status`)
+}

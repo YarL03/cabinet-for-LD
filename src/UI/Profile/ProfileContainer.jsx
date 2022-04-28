@@ -3,7 +3,7 @@ import { setAddPost, setLike, setUpdatePostState } from "../../redux/profile-red
 import Profile from "./Profile";
 
 const mapStateToProps = (state) => ({
-  authorizedUser: state.profilePage.authorizedUser,
+  authorizedUserData: state.profilePage.authorizedUserData,
   posts: state.profilePage.posts,
   newPostText: state.profilePage.newPostText
 })

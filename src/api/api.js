@@ -13,18 +13,21 @@ export const ClientsAPI = {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data)},
 
-    getClient: (id) => instance.get(`profile/${id}`)
-        .then(response => response.data),
-
     getOnlineUsers: () => instance.get('users?count=10')
     .then(response => response.data.items)
 }
 
 export const AuthAPI = {
     getIsAuth: () => instance.get(`auth/me`)
-        .then(response => response.data)
+        .then(response => {debugger
+             return response.data})
 }
 
 export const ProfileAPI = {
-    setStatus: () => instance.put(`status`)
-}
+    updateStatus: (status) => instance.put(`profile/status`, {status}),
+
+    getStatus: (id) => instance.get(`profile/status/${id}`),
+    
+    getUserData: (id) => instance.get(`profile/${id}`)
+        .then(response => response.data),
+} 

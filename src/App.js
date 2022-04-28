@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./styles/App.css";
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import { Messages } from "./UI/Messages/Messages";
 import { DialogContainer } from "./UI/Messages/Dialog/DialogContainer";
 import MainContainer from "./UI/Main/MainContainer";
@@ -11,6 +11,7 @@ import Login from "./UI/Login/Login";
 import RequireAuth from "./UI/hoc/RequireAuth";
 import { Initialization } from "./UI/hoc/Initialization";
 import { Layout } from "./UI/Layout/Layout";
+import SomeoneElsesProfile from "./UI/Profile/SomeoneElsesProfile";
 
 function App(props) {
   
@@ -22,14 +23,16 @@ function App(props) {
           <Route path="/" element={<Layout />}>
 
             <Route index element={<MainContainer/>} />
-            <Route path="profile" element={<ProfileContainer/>}>
-              <Route path=":id" element={<ProfileContainer/>}/> 
+
+            <Route path="profile" element={<Outlet/>}>
+              <Route index element={<ProfileContainer/>}/>
+              <Route path=":id" element={<SomeoneElsesProfile/>}/> 
             </Route>
+
             <Route path="messages" element={<Messages/>}>
               <Route index element={<Dialogs store={props.store}/>}/>
               <Route path=":id" element={<DialogContainer/>}/>
             </Route>
-            
 
           </Route>
         </Route>

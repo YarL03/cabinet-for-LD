@@ -1,18 +1,23 @@
+import { ProfileAPI } from "../api/api"
+
 const ADD_POST = 'ADD-POST'
 const UPDATE_POST_STATE = 'UPDATE-POST-STATE'
 const SET_LIKE = 'SET_LIKE'
 const SET_STATUS = 'SET_STATUS'
+const SET_AUTHORIZED_USER_DATA = 'SET_AUTHORIZED_USER_DATA'
+const SET_ANOTHER_USER_DATA = 'SET_ANOTHER_USER_DATA'
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 let initialState = {
-  authorizedUser: {name:'Yaroslav', surname: 'Labetsky', status: 'online', currentCity: 'Minsk'},
+  authorizedUserData: {name:'Yaroslav', surname: 'Labetsky', online: 'online', currentCity: 'Minsk', status: '',},
+  anotherUserData: {online: 'online', currentCity: 'Minsk', status: '',},
   posts: [
     { id: 1, name:'Yaroslav', surname: 'Labetsky', message: "Hey, how are you?", likeAmount: 10, myLike: false, color: '#000', date: `22 Nov 2022`},
     { id: 2, name:'Yaroslav', surname: 'Labetsky', message: "Hey, how are you?", likeAmount: 23, myLike: true, color: 'rgb(253, 99, 163)', date: `27 Nov 2022`},
     { id: 3, name:'Yaroslav', surname: 'Labetsky', message: "It's my first post here", likeAmount: 5, myLike: true, color: 'rgb(253, 99, 163)', date: `28 Nov 2022`},
   ],
   newPostText: "",
-  status: '',
+  
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -25,8 +30,8 @@ const profileReducer = (state = initialState, action) => {
                 id: Date.now(),
                 message: state.newPostText,
                 likeAmount: "",
-                name: state.authorizedUser.name,
-                surname: state.authorizedUser.surname
+                name: state.authorizedUserData.name,
+                surname: state.authorizedUserData.surname
               };
 
           return {...state,
@@ -57,7 +62,17 @@ const profileReducer = (state = initialState, action) => {
 
         case SET_STATUS: {
           debugger
-          return {...state, status: action.status}
+          return action.isMe ? {...state, authorizedUserData: {...state.authorizedUserData, status: action.status}} :
+            {...state, anotherUserData: {...state.anotherUserData, status: action.status}}
+        }
+
+        case SET_AUTHORIZED_USER_DATA: {
+          debugger
+          return {...state, authorizedUserData: {...state.authorizedUserData, ...action.authorizedData}}
+        }
+        
+        case SET_ANOTHER_USER_DATA: {
+          return {...state, anotherUserData: {...state.anotherUserData, ...action.userData}}
         }
           default: return state
     }
@@ -80,9 +95,50 @@ export const setLike = ({isLiked, id}) => ({
   id
 })
 
-export const setStatus = (status) => ({
+export const setStatus = (status, isMe) => ({
   type: 'SET_STATUS',
-  status
+  status,
+  isMe
 })
+
+export const setAuthorizedUserData = (authorizedData) => ({
+  type: SET_AUTHORIZED_USER_DATA,
+  authorizedData
+})
+
+export const setAnotherUserData = (userData) => ({
+  type: SET_ANOTHER_USER_DATA,
+  userData
+})
+
+export const getStatus = (id, isMe) => (dispatch) => {
+  ProfileAPI.getStatus(id)
+    .then(response => {
+      debugger
+      dispatch(setStatus((response.data || ''), isMe))
+    })
+}
+
+export const updateStatus = (status) => (dispatch) => {
+  ProfileAPI.updateStatus(status)
+    .then(response => {
+      if(!response.resultCode) dispatch(setStatus(status, true))
+    })
+}
+
+export const getUserData = (id, isMe) => (dispatch) => {
+  ProfileAPI.getUserData(id)
+    .then(response => 
+      {debugger
+        dispatch(getStatus(id, isMe))
+
+        isMe ? dispatch(setAuthorizedUserData(response)) :
+        dispatch(setAnotherUserData(response))
+            
+        }
+        
+      //доделать
+  )
+}
 
 export default profileReducer

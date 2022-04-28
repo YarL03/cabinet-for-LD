@@ -3,34 +3,36 @@ import s from "./Profile.module.css";
 import { NavLink, useParams } from "react-router-dom";
 import MyPosts from "./MyPosts/MyPosts";
 import { useDispatch, useSelector } from "react-redux";
-import { setStatus } from "../../redux/profile-reducer";
+import { getStatus, setStatus, updateStatus } from "../../redux/profile-reducer";
 
 const Profile = (props) => {
   const [editMode, setEditMode] = useState(false) 
-  const [statusValue, setStatusValue] = useState('')
-  const statusRedux = useSelector(state => state.profilePage.status)
-  const {id} = useParams()
+  const statusRedux = useSelector(state => state.profilePage.authorizedUserData.status)
+  const [localStatus, setLocalStatus] = useState(statusRedux)
+  
   const dispatch = useDispatch()
 
   const toggleEditMode = () => {
     setEditMode(!editMode)
   }
 
-  const updateStatusValue = (e) => {
+  const updateLocalStatus = (e) => {
     let value = e.target.value
     if(value.length >= 140) return
-    setStatusValue(e.target.value)
+    setLocalStatus(e.target.value)
   }
 
-  const submitStatusValue = (e) => {
+  const submitLocalStatus = (e) => {
     e.preventDefault()
     setEditMode(!editMode)
-    dispatch(setStatus(statusValue))
-    
+    dispatch(setStatus(localStatus, true))
+    dispatch(updateStatus(localStatus))
   }
 
-  useEffect(() => {}, [])
-  console.log(id)
+  useEffect(() => {
+    // dispatch(getStatus())
+  }, [])
+  
   return (
     <div className={s.profile}>
       <div className="firstColumn">
@@ -52,17 +54,17 @@ const Profile = (props) => {
           <div className={s.pageInfo}>
             <div className={s.pageTop}>
               <div className={s.pageStatus}>
-                <div className={s.online}>{props.authorizedUser.status}</div>
+                <div className={s.online}>{props.authorizedUserData.online}</div>
               </div>
-              <h1 className={s.pageName}>{`${props.authorizedUser.name} ${props.authorizedUser.surname}`}</h1>
+              <h1 className={s.pageName}>{`${props.authorizedUserData.name} ${props.authorizedUserData.surname}`}</h1>
               <div className={s.status}>
                 {!editMode && 
                 <div className={s.defaultStatus} onClick={toggleEditMode}>{statusRedux || "установить статус"}</div>
                 }
                 {editMode &&
                 <div className={s.statusModal}>
-                  <form onSubmit={submitStatusValue}>
-                  <input autoFocus onChange={updateStatusValue} value={statusValue}/>
+                  <form onSubmit={submitLocalStatus}>
+                  <input autoFocus onChange={updateLocalStatus} value={localStatus}/>
                   <button type="submit">Сохранить</button>
                   </form>
                 </div>
@@ -73,7 +75,7 @@ const Profile = (props) => {
               <div className={s.profileInfo}>
                 <div className={s.infoRow}>
                   <h3 className={s.label}>Current city:</h3>
-                  <div className={s.labeled}>{props.authorizedUser.currentCity}</div>
+                  <div className={s.labeled}>{props.authorizedUserData.currentCity}</div>
                 </div>
                 <div className={s.showMore}>
                   <a>

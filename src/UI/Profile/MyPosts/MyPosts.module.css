@@ -23,7 +23,6 @@ textarea {
     padding: 15px;
     border-color: #bfbfbf;
     outline: none;
-    max-height: 330px;
 }
 
 textarea:focus {

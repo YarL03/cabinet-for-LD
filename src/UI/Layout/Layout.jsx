@@ -2,15 +2,18 @@ import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Header from "../Header/Header";
-import "./Layout.css"
+import s from "./Layout.module.css"
+import Preloader from "../components/common/Preloader/Preloader";
+import { useSelector } from "react-redux";
 
 export const Layout = () => {
+  const isFetching = useSelector(state => state.auth.isFetching)
 
-  return (
+  return isFetching ? <Preloader s={s}/> :  (
     <>
       <Header />
       <Navbar />
-      <div className="content-wrapper">
+      <div className={s.contentWrapper}>
       <Outlet />
       </div>
     </>

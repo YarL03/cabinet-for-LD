@@ -1,23 +1,33 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { addMessage } from "../../../redux/messsages-reducer";
 import UserImg from "../../СrosspageComponents/UserImg";
 import { Chats } from "../Chats/Chats";
 import s from "./Dialog.module.css";
 import { Message } from "./Message/Message";
+import { MessageForm } from "./MessageForm";
 
+//переписать на хуки
 export const Dialog = (props) => {
+  const dispatch = useDispatch()
   const {id} = useParams() // Я в шоке: тут приходит строка, а я даже не знал об этом
   const data = props.dialogs.filter(item => item.id === +id)[0] // ВАЖНО
 
-  const addMessage = () => {
-    if(!props.newMessageText) return
-    props.addMessage(+id)
-  }
+  // const addMessage = () => {
+  //   if(!props.newMessageText) return
+  //   props.addMessage(+id)
+  // }
 
-  const onMessageChange = (e) => {
-    let text = e.target.value
-    console.log(text)
-    props.updateMessageText(text)
+  // const onMessageChange = (e) => {
+  //   let text = e.target.value
+  //   console.log(text)
+  //   props.updateMessageText(text)
+  // }
+
+  const submitHandler = (data) => {
+    debugger
+    dispatch(addMessage(+id, data.messageInput))
   }
 
   return (
@@ -67,14 +77,7 @@ export const Dialog = (props) => {
             <Message key={index} date={data.date} name={data.name} message={item}/>
             )}</div>
         </div>
-        <div className={s.textArea}>
-          <div className={s.docs}></div>
-          <textarea placeholder='Write a message'
-          value={props.newMessageText}
-          onChange={onMessageChange}
-          ></textarea>
-          <button onClick={addMessage}>Send</button>
-        </div>
+        <MessageForm s={s} submitHandler={submitHandler}/>
       </div>
       {/* <div className={s.secondColumn}>
         <Chats />

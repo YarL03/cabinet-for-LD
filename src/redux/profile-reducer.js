@@ -28,7 +28,7 @@ const profileReducer = (state = initialState, action) => {
             let newPost = {
                 date: `${new Date().getDate()} ${MONTHS[new Date().getMonth()]} ${new Date().getFullYear()}`,
                 id: Date.now(),
-                message: state.newPostText,
+                message: action.postText,
                 likeAmount: "",
                 name: state.authorizedUserData.name,
                 surname: state.authorizedUserData.surname
@@ -81,8 +81,13 @@ const profileReducer = (state = initialState, action) => {
 }
 
 export const setAddPost = () => ({
-    type: 'ADD-POST'
-  })
+    type: ADD_POST
+  }) // убрать
+
+export const addPost = (postText) => ({
+  type: ADD_POST,
+  postText
+})
   
   export const setUpdatePostState = (text) => ({
     type: 'UPDATE-POST-STATE',

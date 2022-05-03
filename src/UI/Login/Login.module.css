@@ -20,8 +20,16 @@
     font-size: 16px;
 }
 
-.authorization:nth-child(1) .text {
+/* .authorization:nth-child(1) .text {
     margin-bottom: 20px;
+} */
+
+.authorization .text {
+    margin-bottom: 40px;
+}
+
+.authorization .checkbox label {
+    margin-left: 10px;
 }
 
 .preloader {

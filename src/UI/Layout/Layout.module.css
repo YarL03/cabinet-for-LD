@@ -1,4 +1,4 @@
-.content-wrapper {
+.contentWrapper {
   position: absolute;
   width: calc(100% - 300px);
   left: 300px;
@@ -7,7 +7,7 @@
   transition: .5s;
 }
 
-.content-wrapper.active {
+.contentWrapper.active {
   width: calc(100% - 80px);
   left: 80px;
 }
@@ -15,12 +15,12 @@
 .preloader {}
 
 @media (max-width: 991px) {
-  .content-wrapper {
+  .contentWrapper {
       width: 100%;
       left: 0;
   }
 
-  .content-wrapper.active {
+  .contentWrapper.active {
       left: 300px;
   }
 }

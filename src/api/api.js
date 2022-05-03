@@ -20,7 +20,13 @@ export const ClientsAPI = {
 export const AuthAPI = {
     getIsAuth: () => instance.get(`auth/me`)
         .then(response => {debugger
-             return response.data})
+             return response.data}),
+    
+    login: (formState) => instance.post(`auth/login`, {
+        ...formState
+    }),
+
+    logout: () => instance.post(`auth/logout`)
 }
 
 export const ProfileAPI = {

@@ -8,7 +8,6 @@ let initialState = {
     {id: 3, myMessages: ["123"], messages: ["Hey, how are you doing?", "I love you", "Hugs"], name: "Victoria Mongush", date: `14:53`},
     {id: 4, myMessages: ["124"], messages: ["Yeah, exactly"], name: "Vladimir Uvarov", date: `10:28`},
   ],
-  newMessageText: "",
 }
 
 const messagesReducer = (state = initialState, action) => {
@@ -23,7 +22,7 @@ const messagesReducer = (state = initialState, action) => {
           let stateCopy = {...state,
             dialogs: state.dialogs.map(item => {
               if (item.id === action.id) {
-                return {...item, messages: [...item.messages, state.newMessageText]}
+                return {...item, messages: [...item.messages, action.messageText]}
               }
               return {...item}
             }),
@@ -39,11 +38,13 @@ const messagesReducer = (state = initialState, action) => {
     
 }
 
-export const addMessageActionCreator = (id) => ({
-  type: 'ADD-MESSAGE',
+export const addMessage = (id, messageText) => ({
+  type: ADD_MESSAGE,
   id,
+  messageText
 })
 
+//убрать...
 export const updateMessageStateActionCreator = (text) => ({
   type: 'UPDATE-MESSAGE-STATE',
   text,

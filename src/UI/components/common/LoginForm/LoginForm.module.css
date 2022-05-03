@@ -1,0 +1,12 @@
+.required {
+    position: absolute;
+    font-size: 14px;
+}
+
+.required.first {
+    top: 45px;
+}
+
+.required.second {
+    top: 120px;
+}

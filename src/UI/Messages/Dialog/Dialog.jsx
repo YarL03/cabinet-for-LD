@@ -14,17 +14,6 @@ export const Dialog = (props) => {
   const {id} = useParams() // Я в шоке: тут приходит строка, а я даже не знал об этом
   const data = props.dialogs.filter(item => item.id === +id)[0] // ВАЖНО
 
-  // const addMessage = () => {
-  //   if(!props.newMessageText) return
-  //   props.addMessage(+id)
-  // }
-
-  // const onMessageChange = (e) => {
-  //   let text = e.target.value
-  //   console.log(text)
-  //   props.updateMessageText(text)
-  // }
-
   const submitHandler = (data) => {
     debugger
     dispatch(addMessage(+id, data.messageInput))

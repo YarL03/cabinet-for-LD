@@ -78,7 +78,7 @@
 }
 
 .pageTop {
-    padding: 0 0 30px;
+    padding: 0 0 45px;
     border-bottom: 1px solid #d9dee4;
 }
 
@@ -133,27 +133,25 @@
 
 .status {
     cursor: pointer;
-    color: #818c99;
-    font-size: 14px;
+    color: #445366;
+    font-size: 13px;
     margin: 1px 0px -4px;
     padding: 2px 0px 4px;
 }
 
-.status input {
-    height: 20px;
+.status textarea {
     width: 100%;
+    overflow: hidden;
 }
 
 .status .defaultStatus:hover {
     background: #eceef0;
 }
 
-.status .statusModal {
-    
+.status .statusModal { 
     height: 50px;
     background: var(--white);
     margin: 5px 0 -10px;
-    
     width: 100%;
 }
 
@@ -165,15 +163,18 @@
     align-items: flex-end;
 }
 
-.status .statusModal input {
-    padding: 10px 5px;
+.status .statusModal textarea {
+    padding: 0 5px;
+    height: 40px;
+    max-height: 50px;
     border-radius: 5px;
     border: 1px solid #bdbdbd;
     outline: none;  
 }
 
-.status .statusModal input:focus {
+.status .statusModal textarea:focus {
     border-color: var(--blue);
+    padding: 0 5px;
 }
 
 .status .statusModal button {
@@ -186,6 +187,5 @@
     border-color: var(--blue);
     border-radius: 6px;
     color: var(--white);
-    
     cursor: pointer;
 }

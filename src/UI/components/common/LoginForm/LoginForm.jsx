@@ -4,13 +4,9 @@ import { useSelector } from "react-redux";
 import style from "./LoginForm.module.css"
 
 export const LoginForm = ({submitHandler, s}) => {
-    const {register, formState: {errors}, handleSubmit, reset} = useForm() // { mode: ''}
+    const {register, formState: {errors}, handleSubmit, setValue, getValues} = useForm() // { mode: ''}
     const errorMessage = useSelector(state => state.auth.errorMessage)
-
     
-
-    console.log(style)
-
     return (
         <>
         <form onSubmit={handleSubmit(submitHandler)} className={s.authorization}>
@@ -19,7 +15,7 @@ export const LoginForm = ({submitHandler, s}) => {
                     required: `This field is required`,
                     pattern: {
                         value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
-                        message: `Incorrect email`
+                        message: `Invalid email`
                     }
                 })
             } placeholder="Введите логин"/>
@@ -36,13 +32,11 @@ export const LoginForm = ({submitHandler, s}) => {
                         ...register('rememberMe')
                     }
                      />
-                    <label>Remember me</label>
+                    <label onClick={() => setValue('rememberMe', !getValues('rememberMe'))}>Remember me</label>
                 </div>
             <button>Войти</button>
-            {errorMessage && <p>{errorMessage}</p>}
+            {errorMessage && <p className={`${style.required} ${style.third}`}>{errorMessage}</p>}
         </form>
-
-        
         </>
     )
 }

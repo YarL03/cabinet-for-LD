@@ -1,15 +1,18 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setLike } from "../../../../redux/profile-reducer";
 import UserImg from "../../../СrosspageComponents/UserImg";
 import Like from "./Like";
 import s from "./Post.module.css";
 
 const Post = (props) => {
+  const dispatch = useDispatch()
 
-  const setLike = () => {
-    props.setLike({
+  const onLike = () => {
+    dispatch(setLike({
       isLiked: props.post.myLike,
       id: props.post.id
-    })
+    }))
   }
 
   return (
@@ -54,7 +57,7 @@ const Post = (props) => {
       <div className={s.likeWrap}>
         <div className={s.likeCount}>
           <span className={s.likeIcon}>
-            {<Like setLike={setLike} isLiked={props.post.myLike} color={props.post.color}/>}
+            {<Like setLike={onLike} isLiked={props.post.myLike} color={props.post.color}/>}
           </span>
           <span className={s.likeAmount}>{props.post.likeAmount}</span>
         </div>

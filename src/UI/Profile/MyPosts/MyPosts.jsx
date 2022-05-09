@@ -7,12 +7,15 @@ import Post from "./Post/Post";
 import { PostForm } from "./PostForm";
 
 //переписать на хуки
-const MyPosts = (props) => {
+const MyPosts = React.memo(props => {
   const dispatch = useDispatch()
+
   const submitHandler = (data) => {
     debugger
     dispatch(addPost(data.postInput))
   }
+
+console.log(`render MyPosts`)
 
   return (
     <div>
@@ -27,6 +30,6 @@ const MyPosts = (props) => {
       ))}
     </div>
   );
-};
+});
 
 export default MyPosts;

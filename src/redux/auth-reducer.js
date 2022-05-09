@@ -1,9 +1,9 @@
 import { AuthAPI } from "../api/api"
 
-const SET_USER_DATA = 'SET_USER_DATA' 
-const TOGGLE_IS_FETCHING_AUTH = 'TOGGLE_IS_FETCHING_AUTH'
-const SET_IS_AUTH = 'SET_IS_AUTH'
-const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE'  
+const SET_USER_DATA = 'auth/SET_USER_DATA' 
+const TOGGLE_IS_FETCHING_AUTH = 'auth/TOGGLE_IS_FETCHING_AUTH'
+const SET_IS_AUTH = 'auth/SET_IS_AUTH'
+const SET_ERROR_MESSAGE = 'auth/SET_ERROR_MESSAGE'  
 
 let initialState = {
     authMeData: {
@@ -18,7 +18,6 @@ let initialState = {
 const authReducer = (state = initialState, action) => {
   switch(action.type) {
     case SET_USER_DATA: 
-    debugger
       return {...state, authMeData: {...action.authMeData}}
       
     case TOGGLE_IS_FETCHING_AUTH:
@@ -55,31 +54,34 @@ export const setIsAuth = (isAuth) => ({
 })
 
 export const getIsAuth = () => (dispatch) => {
-  AuthAPI.getIsAuth().then(data => {
+ return AuthAPI.getIsAuth().then(data => {
     if (!data.resultCode) {
-
       dispatch(setIsAuth(!data.resultCode))
       dispatch(setAuthMeData(data.data))
     }
   })
+  
 }
 
 export const login = (formState) => (dispatch) => {
   AuthAPI.login(formState).then(response => {
-    debugger
     if (!response.data.resultCode) {
       dispatch(setErrorMessage(null))
       dispatch(getIsAuth())
-      return
     }
-    dispatch(setErrorMessage(response.data.messages))
-  })
+    else dispatch(setErrorMessage(response.data.messages))
+  }).then(() => dispatch(toggleIsFetchingAuth(false)))
 }
 
 export const logout = () => (dispatch) => {
   AuthAPI.logout().then(data => {
     if (!data.resultCode) {
       dispatch(setIsAuth(false))
+      dispatch(setAuthMeData({
+        id: null,
+        login: null,
+        email: null}
+        ))
     }
   })
 }

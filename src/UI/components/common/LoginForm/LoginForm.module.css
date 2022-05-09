@@ -1,6 +1,12 @@
 .required {
     position: absolute;
-    font-size: 14px;
+    font-size: 16px;
+    color: #bf1650;
+}
+
+.required::before {
+    display: inline;
+    content: "⚠ ";
 }
 
 .required.first {
@@ -9,4 +15,9 @@
 
 .required.second {
     top: 120px;
+}
+
+.required.third {
+    top: 200px;
+    font-size: 17px;
 }

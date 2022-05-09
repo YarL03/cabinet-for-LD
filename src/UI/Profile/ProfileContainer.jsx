@@ -1,18 +1,14 @@
-import { connect } from "react-redux";
-import { setAddPost, setLike, setUpdatePostState } from "../../redux/profile-reducer";
+import { useSelector } from "react-redux";
 import Profile from "./Profile";
 
-const mapStateToProps = (state) => ({
-  authorizedUserData: state.profilePage.authorizedUserData,
-  posts: state.profilePage.posts,
-  newPostText: state.profilePage.newPostText
-})
+const ProfileContainer = (props) => {
+  const authorizedUserData = useSelector(state => state.profilePage.authorizedUserData)
+  const posts = useSelector(state => state.profilePage.posts)
+  const statusRedux = useSelector(state => state.profilePage.authorizedUserData.status)
 
-const ProfileContainer = connect(mapStateToProps, {
-  setUpdatePostState,
-  setAddPost,
-  setLike,
-})(Profile)
+  return <Profile authorizedUserData={authorizedUserData} posts={posts} statusRedux={statusRedux}/>
+}
+
  
 
 export default ProfileContainer;

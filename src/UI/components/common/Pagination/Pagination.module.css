@@ -1,0 +1,23 @@
+.pagination {
+    position: absolute;
+    bottom: 0;
+    height: 20px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+
+.pagination span {
+    cursor: pointer;
+    padding: 1px 7px;
+    font-size: 18px;
+    color: var(--white);
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 50%;
+}
+
+.pagination .selectedPage {
+    font-weight: 700;
+    background-color: var(--white);
+    color: var(--blue);
+}

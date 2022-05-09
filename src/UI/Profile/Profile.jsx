@@ -1,37 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import s from "./Profile.module.css";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import MyPosts from "./MyPosts/MyPosts";
-import { useDispatch, useSelector } from "react-redux";
-import { getStatus, setStatus, updateStatus } from "../../redux/profile-reducer";
+import { useDispatch } from "react-redux";
+import { setStatus, updateStatus } from "../../redux/profile-reducer";
+import { StatusForm } from "./StatusForm";
 
-const Profile = (props) => {
-  const [editMode, setEditMode] = useState(false) 
-  const statusRedux = useSelector(state => state.profilePage.authorizedUserData.status)
-  const [localStatus, setLocalStatus] = useState(statusRedux)
-  
+const Profile = (props) => { 
   const dispatch = useDispatch()
 
-  const toggleEditMode = () => {
-    setEditMode(!editMode)
+  const submitLocalStatus = (status) => {
+    dispatch(setStatus(status, true))
+    dispatch(updateStatus(status))
   }
 
-  const updateLocalStatus = (e) => {
-    let value = e.target.value
-    if(value.length >= 140) return
-    setLocalStatus(e.target.value)
-  }
-
-  const submitLocalStatus = (e) => {
-    e.preventDefault()
-    setEditMode(!editMode)
-    dispatch(setStatus(localStatus, true))
-    dispatch(updateStatus(localStatus))
-  }
-
-  useEffect(() => {
-    // dispatch(getStatus())
-  }, [])
+  console.log('render')
   
   return (
     <div className={s.profile}>
@@ -57,19 +40,7 @@ const Profile = (props) => {
                 <div className={s.online}>{props.authorizedUserData.online}</div>
               </div>
               <h1 className={s.pageName}>{`${props.authorizedUserData.name} ${props.authorizedUserData.surname}`}</h1>
-              <div className={s.status}>
-                {!editMode && 
-                <div className={s.defaultStatus} onClick={toggleEditMode}>{statusRedux || "установить статус"}</div>
-                }
-                {editMode &&
-                <div className={s.statusModal}>
-                  <form onSubmit={submitLocalStatus}>
-                  <input autoFocus onChange={updateLocalStatus} value={localStatus}/>
-                  <button type="submit">Сохранить</button>
-                  </form>
-                </div>
-                }
-              </div>
+              <StatusForm s={s} submitHandler={submitLocalStatus} statusRedux={props.statusRedux}/>
             </div>
             <div className={s.pageInfoShort}>
               <div className={s.profileInfo}>
@@ -90,8 +61,7 @@ const Profile = (props) => {
           </div>
           <div className="counts"></div>
         </div>
-        <MyPosts posts={props.posts} newPostText={props.newPostText} setLike={props.setLike}
-         setAddPost={props.setAddPost} setUpdatePostState={props.setUpdatePostState}/>
+        <MyPosts posts={props.posts}/>
       </div>
       <div className={s.thirdColumn}>asdas</div>
     </div>

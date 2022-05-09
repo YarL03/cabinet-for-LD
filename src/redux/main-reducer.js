@@ -4,14 +4,16 @@ import ChatBubblesSVG from "../UI/Main/svg/ChatBubblesSVG"
 import EyeSVG from "../UI/Main/svg/EyeSVG"
 import MagnifierSVG from "../UI/Main/svg/MagnifierSVG"
 
-const SET_CARDS = 'SET_CARDS'
-const SET_USERS = 'SET_USERS'
-const SET_ALL_CLIENTS = 'SET_ALL_CLIENTS'
-const SET_CURRENT_CLIENTS = 'SET_CURRENT_CLIENTS'
-const SET_VIEW_ALL_CLIENTS = 'SET_VIEW_ALL_CLIENTS'
-const SET_TOTAL_CLIENTS_AMOUNT = 'SET_TOTAL_CLIENTS_AMOUNT'
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'  
+const SET_CARDS = 'main/SET_CARDS'
+const SET_USERS = 'main/SET_USERS'
+const SET_CURRENT_CLIENTS = 'main/SET_CURRENT_CLIENTS'
+const SET_TOTAL_CLIENTS_AMOUNT = 'main/SET_TOTAL_CLIENTS_AMOUNT'
+const SET_CURRENT_PAGE = 'main/SET_CURRENT_PAGE'
+const TOGGLE_IS_FETCHING = 'main/TOGGLE_IS_FETCHING' 
+
+const statuses = [{status: 'Resolved', style: "#8de02c"}, {status: 'Waiting', style: "#f9ca3f"}, 
+{status: 'In progress', style: "#1795c1"}, {status: 'Rejected', style: "#f00"}]
+const kindsOfLaw = ["Civil Law", "Land Law"]
 
 let initialState = {
     cards: [
@@ -30,14 +32,12 @@ let initialState = {
           id: 6,
         },
       ],
-      allClients: [],
       currentClients: [],
       totalClientsAmount: 0,
       currentPage: 1,
       onlineUsers: [],
       pageSize: 8,
-      viewAllPressed: false,
-      isFetching: null,
+      isFetching: false,
 }
 
 const mainReducer = (state = initialState, action) => {
@@ -47,10 +47,7 @@ const mainReducer = (state = initialState, action) => {
       return {...state, cards: [...state.cards, ...action.cards]}
 
     case SET_USERS: 
-      return {...state, onlineUsers: [...state.onlineUsers, ...action.onlineUsers]}
-  
-    case SET_ALL_CLIENTS: 
-      return {...state, allClients: [...state.allClients, ...action.allClients]}
+      return {...state, onlineUsers: [...action.onlineUsers]}
 
     case SET_TOTAL_CLIENTS_AMOUNT: 
       return {...state, totalClientsAmount: action.amount}
@@ -60,9 +57,6 @@ const mainReducer = (state = initialState, action) => {
 
     case SET_CURRENT_PAGE: 
       return {...state, currentPage: action.currentPage}
-
-    case SET_VIEW_ALL_CLIENTS: 
-      return {...state, viewAllPressed: action.viewAllPressed}
       
     case TOGGLE_IS_FETCHING:
       return {...state, isFetching: action.isFetching} 
@@ -81,11 +75,6 @@ export const setOnlineUsers = (onlineUsers) => ({
   onlineUsers,
 })
 
-export const setAllClients = (allClients) => ({
-  type: SET_ALL_CLIENTS,
-  allClients
-})
-
 export const setCurrentClients = (currentClients) => ({
   type: SET_CURRENT_CLIENTS,
   currentClients
@@ -101,11 +90,6 @@ export const setCurrentPage = (currentPage) => ({
   currentPage
 })
 
-export const setViewAllClients = (viewAllPressed) => ({
-  type: SET_VIEW_ALL_CLIENTS, 
-  viewAllPressed
-})
-
 export const toggleIsFetching = (isFetching) => ({
   type: TOGGLE_IS_FETCHING,
   isFetching
@@ -116,14 +100,11 @@ export const getClients = (currentPage, pageSize) => (dispatch) => {
   dispatch(toggleIsFetching(true))
       ClientsAPI.getClients(currentPage, pageSize).then(data => {
         dispatch(toggleIsFetching(false))
-        let statuses = [{status: 'Resolved', style: "#8de02c"}, {status: 'Waiting', style: "#f9ca3f"}, 
-        {status: 'In progress', style: "#1795c1"}, {status: 'Rejected', style: "#f00"}]
-        let kindsOfLaw = ["Civil Law", "Land Law"]
         let currentClients = data.items.map(item => {
         return {...item, ...statuses[Math.floor(Math.random()*statuses.length)],
            kindOfLaw: kindsOfLaw[Math.floor(Math.random()*kindsOfLaw.length)],
           date: new Date().toLocaleDateString()}
-      }).reverse()
+      })
       dispatch(setTotalClientsAmount(50))
       dispatch(setCurrentClients(currentClients))
 })

@@ -1,18 +1,25 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getIsAuth } from "../../redux/auth-reducer"
+import { getIsAuth, toggleIsFetchingAuth } from "../../redux/auth-reducer"
 import { getUserData } from "../../redux/profile-reducer"
-
+import Preloader from "../components/common/Preloader/Preloader"
+import s from "../Login/Login.module.css"
 
 export const Initialization = ({children}) => {
     const myId = useSelector(state => state.auth.authMeData.id)
+    const isFetching = useSelector(state => state.auth.isFetchingAuth)
     const dispatch = useDispatch()
-
+    
     useEffect(() => {
-        myId ? dispatch(getUserData(myId, true)) : // доделать
-        dispatch(getIsAuth())
+        
+       if(myId) dispatch(getUserData(myId, true)) 
+       else {
+            dispatch(toggleIsFetchingAuth(true))
+            dispatch(getIsAuth()).then(() => dispatch(toggleIsFetchingAuth(false)))
+       }
+        
 
     }, [myId])
 
-    return children
+    return isFetching ? <Preloader s={s}/> : children
 }

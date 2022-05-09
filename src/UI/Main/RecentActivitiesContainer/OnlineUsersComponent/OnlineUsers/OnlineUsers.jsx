@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import s from './OnlineUsers.module.css'
 
-const OnlineUsers = (props) => {
-    console.log(props)
+const OnlineUsers = React.memo(props => {
     return (
         props.onlineUsers.map(item =>
             
@@ -16,6 +15,6 @@ const OnlineUsers = (props) => {
             
             )
     )
-}
+})
 
 export default OnlineUsers

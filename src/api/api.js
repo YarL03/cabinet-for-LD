@@ -19,8 +19,7 @@ export const ClientsAPI = {
 
 export const AuthAPI = {
     getIsAuth: () => instance.get(`auth/me`)
-        .then(response => {debugger
-             return response.data}),
+        .then(response => response.data),
     
     login: (formState) => instance.post(`auth/login`, {
         ...formState

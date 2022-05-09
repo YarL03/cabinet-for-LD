@@ -1,13 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
+import s from '../Navbar/Navbar.module.css'
+import s1 from '../Layout/Layout.module.css'
 import './Header.css'
 
 const Header = () => {
 
-
-    function addActive(e) {
-        document.querySelector('.nav').classList.toggle('active')
+    function addActive() {
+        document.querySelector('.' + s.nav).classList.toggle(s.active)
         document.querySelector('.header').classList.toggle('active')
-        document.querySelector('.content-wrapper').classList.toggle('active')
+        document.querySelector('.' + s1.contentWrapper).classList.toggle(s1.active)
     }
 
     return (

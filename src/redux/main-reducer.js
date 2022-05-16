@@ -95,23 +95,25 @@ export const toggleIsFetching = (isFetching) => ({
   isFetching
 })
 
-export const getClients = (currentPage, pageSize) => (dispatch) => {
+export const getClients = (currentPage, pageSize) => async (dispatch) => {
   dispatch(setCurrentPage(currentPage))
   dispatch(toggleIsFetching(true))
-      ClientsAPI.getClients(currentPage, pageSize).then(data => {
-        dispatch(toggleIsFetching(false))
-        let currentClients = data.items.map(item => {
-        return {...item, ...statuses[Math.floor(Math.random()*statuses.length)],
-           kindOfLaw: kindsOfLaw[Math.floor(Math.random()*kindsOfLaw.length)],
+  let response = await ClientsAPI.getClients(currentPage, pageSize)
+
+  dispatch(toggleIsFetching(false))
+  let currentClients = response.items.map(item => {
+      return {...item, ...statuses[Math.floor(Math.random()*statuses.length)],
+          kindOfLaw: kindsOfLaw[Math.floor(Math.random()*kindsOfLaw.length)],
           date: new Date().toLocaleDateString()}
       })
       dispatch(setTotalClientsAmount(50))
       dispatch(setCurrentClients(currentClients))
-})
+
 }
 
-export const getOnlineUsers = () => (dispatch) => {
-  ClientsAPI.getOnlineUsers().then(items => dispatch(setOnlineUsers(items)))
+export const getOnlineUsers = () => async (dispatch) => {
+let response = await ClientsAPI.getOnlineUsers()
+dispatch(setOnlineUsers(response))
 }
 
 

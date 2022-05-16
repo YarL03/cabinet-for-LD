@@ -1,0 +1,49 @@
+.authorization {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    position: absolute;
+    left: 40%;
+    top: calc(50% - 35px);
+}
+
+.authorization button {
+    height: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+    background-color: var(--blue);
+    border-color: var(--blue);
+    border-radius: 6px;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.authorization .text {
+    height: 35px;
+    font-size: 16px;
+    margin-bottom: 40px;
+    outline: none;
+    border: 2.5px solid var(--grey3);
+}
+
+.authorization .text:focus {
+    border: 2.5px solid var(--blue);
+    background: #dce7f9;
+}
+
+.authorization .checkbox label,
+.authorization .checkbox input {
+    cursor: pointer;
+}
+
+.authorization .checkbox label {
+    margin-left: 10px;
+}
+
+.preloader {
+    position: absolute;
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+    height: 200px;
+}

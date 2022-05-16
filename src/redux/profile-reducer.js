@@ -100,32 +100,24 @@ export const setAnotherUserData = (userData) => ({
   userData
 })
 
-export const getStatus = (id, isMe) => (dispatch) => {
-  ProfileAPI.getStatus(id)
-    .then(response => {
-      dispatch(setStatus((response.data || ''), isMe))
-    })
+export const getStatus = (id, isMe) => async (dispatch) => {
+ let response = await ProfileAPI.getStatus(id)
+    if(response) dispatch(setStatus((response.data || ''), isMe))
+    
 }
 
-export const updateStatus = (status) => (dispatch) => {
-  ProfileAPI.updateStatus(status)
-    .then(response => {
-          })
+export const updateStatus = (status) => async (dispatch) => {
+  let response = await ProfileAPI.updateStatus(status)
 }
 
-export const getUserData = (id, isMe) => (dispatch) => {
-  ProfileAPI.getUserData(id)
-    .then(response => 
-      {
+export const getUserData = (id, isMe) => async (dispatch) => {
+  let response = await ProfileAPI.getUserData(id)
+    
         dispatch(getStatus(id, isMe))
 
         isMe ? dispatch(setAuthorizedUserData(response)) :
-        dispatch(setAnotherUserData(response))
-            
-        }
-        
+        dispatch(setAnotherUserData(response)) 
       //доделать
-  )
 }
 
 export default profileReducer

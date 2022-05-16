@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import s from "./Profile.module.css";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,13 +7,14 @@ import { getUserData } from "../../redux/profile-reducer";
 const SomeoneElsesProfile = (props) => {
   const {id} = useParams()
   const userData = useSelector(state => state.profilePage.anotherUserData)
-  const [isFetching, setIsFetching] = useState(false)
   const dispatch = useDispatch()
   
   useEffect(() => {
-    dispatch(getUserData(+id, false)) // тут надо через suspense
-  }, [userData])
-  console.log(typeof id)
+    dispatch(getUserData(+id, false))
+  }, [id])
+  
+  debugger
+  
   return (
     <div className={s.profile}>
       <div className="firstColumn">

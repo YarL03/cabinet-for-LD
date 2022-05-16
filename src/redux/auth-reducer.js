@@ -63,19 +63,19 @@ export const getIsAuth = () => (dispatch) => {
   
 }
 
-export const login = (formState) => (dispatch) => {
-  AuthAPI.login(formState).then(response => {
+export const login = (formState) => async (dispatch) => {
+  let response = await AuthAPI.login(formState)
     if (!response.data.resultCode) {
       dispatch(setErrorMessage(null))
       dispatch(getIsAuth())
     }
     else dispatch(setErrorMessage(response.data.messages))
-  }).then(() => dispatch(toggleIsFetchingAuth(false)))
+  dispatch(toggleIsFetchingAuth(false))
 }
 
-export const logout = () => (dispatch) => {
-  AuthAPI.logout().then(data => {
-    if (!data.resultCode) {
+export const logout = () => async (dispatch) => {
+  let response = await AuthAPI.logout()
+    if (!response.resultCode) {
       dispatch(setIsAuth(false))
       dispatch(setAuthMeData({
         id: null,
@@ -83,7 +83,6 @@ export const logout = () => (dispatch) => {
         email: null}
         ))
     }
-  })
 }
 
 export default authReducer

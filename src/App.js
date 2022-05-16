@@ -11,7 +11,12 @@ import Login from "./UI/Login/Login";
 import RequireAuth from "./UI/hoc/RequireAuth";
 import { Initialization } from "./UI/hoc/Initialization";
 import { Layout } from "./UI/Layout/Layout";
-import SomeoneElsesProfile from "./UI/Profile/SomeoneElsesProfile";
+import Register from "./UI/Register/Register";
+import './firebase'
+
+
+
+const SomeoneElsesProfile = React.lazy(() => import("./UI/Profile/SomeoneElsesProfile")) 
 
 function App(props) {
   
@@ -38,6 +43,7 @@ function App(props) {
         </Route>
 
         <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
         
       </Routes>
       </Initialization>

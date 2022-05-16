@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { login, toggleIsFetchingAuth } from "../../redux/auth-reducer";
-import { LoginForm } from "../components/common/LoginForm/LoginForm";
+import { LoginForm } from "./LoginForm/LoginForm";
 
 import s from "./Login.module.css"
 

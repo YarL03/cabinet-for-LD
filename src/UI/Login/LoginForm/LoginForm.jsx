@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
 import style from "./LoginForm.module.css"
 
 export const LoginForm = ({submitHandler, s}) => {
@@ -36,7 +37,11 @@ export const LoginForm = ({submitHandler, s}) => {
                 </div>
             <button>Войти</button>
             {errorMessage && <p className={`${style.required} ${style.third}`}>{errorMessage}</p>}
+            <Link to='/register'>
+             <span>Регистрация</span>
+            </Link>
         </form>
+        
         </>
     )
 }

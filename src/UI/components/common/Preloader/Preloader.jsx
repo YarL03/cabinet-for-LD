@@ -3,7 +3,7 @@ import preloader from '../../../../images/preloader.svg'
 
 const Preloader = ({s}) => {
     return (
-        <img className={s.preloader} src={preloader} />
+        <img className={s.preloader || ''} src={preloader} />
     )
 }
 

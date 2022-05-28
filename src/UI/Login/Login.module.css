@@ -1,41 +1,25 @@
-.authorization {
+.login {
+    height: 100vh;
+    background: var(--forBack);
     display: flex;
     flex-direction: column;
-    width: 350px;
-    position: absolute;
-    left: 40%;
-    top: calc(50% - 35px);
+    justify-content: center;
+    align-items: center;
 }
 
-.authorization button {
-    height: 25px;
-    width: 70px;
-    font-size: 14px;
-    font-weight: 500;
+.authorization {
     position: relative;
-    left: calc(100% - 70px);
-    background-color: var(--blue);
-    border-color: var(--blue);
-    border-radius: 6px;
-    color: var(--white);
-    cursor: pointer;
-}
-
-.authorization .text {
-    height: 35px;
-    font-size: 16px;
-    margin-bottom: 40px;
-    outline: none;
-    border: 2.5px solid var(--grey3);
-}
-
-.authorization .text:focus {
-    border: 2.5px solid var(--blue);
-    background: #dce7f9;
+    display: flex;
+    flex-direction: column;
+    width: 370px;
+    background: var(--white);
+    box-shadow: var(--bs-1);
+    padding: 30px;
 }
 
 .authorization .checkbox label,
 .authorization .checkbox input {
+    margin-top: 20px;
     cursor: pointer;
 }
 
@@ -48,4 +32,50 @@
     top: calc(50% - 100px);
     left: calc(50% - 100px);
     height: 200px;
+}
+
+/*  12312     */
+
+.authorization a{
+    text-decoration: none;
+    color: var(--blue);
+}
+
+.authorization a:hover {
+    color: rgb(117, 186, 252);
+}
+
+.authorization .text {
+    padding: 5px;
+    height: 35px;
+    font-size: 13px;
+    margin-bottom: 10px;
+    outline: none;
+    border: 1px solid var(--grey3);
+    border-radius: 4px;
+}
+
+.authorization .text.error {
+    border: 1px solid red
+}
+
+.authorization .text:focus { 
+    background: #eaeef5;
+    box-shadow: 1px 1px 2px var(--blue), -1px -1px 2px var(--blue);
+}
+
+.authorization .text:focus.error { 
+    background: #f8e5eb;
+    box-shadow: none;
+}
+
+.authorization label {
+    margin: 2px 0;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.authorization .routePhrase {
+    font-size: 14px;
+    text-align: center;
 }

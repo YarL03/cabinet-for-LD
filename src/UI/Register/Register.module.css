@@ -1,13 +1,70 @@
-.authorization {
+.register {
     display: flex;
-    flex-direction: column;
-    width: 350px;
-    position: absolute;
-    left: 40%;
-    top: calc(50% - 35px);
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: var(--forBack);
 }
 
-.authorization button {
+.register .description {
+    margin-right: 80px;
+    display: flex;
+    flex-direction: column;
+}
+
+.register .description h1 {
+    font-size: 23px;
+    font-weight: 500;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.register .description .logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.register .description .item {
+    display: flex;
+    margin-bottom: 24px;
+    font-size: 15px;
+}
+
+.register .description .item .flexPic {
+    width: 24px;
+    margin-right: 8px;
+    fill: var(--blue);
+}
+
+/* .register .formWrapper {
+
+}  */
+
+.register .formWrapper div {
+    text-align: center;
+    font-size: 14px;
+}
+
+.register .formWrapper div a {
+    text-decoration: none;
+    color: var(--blue);
+}
+
+.register .formWrapper div a:hover {
+    color: rgb(117, 186, 252);
+}
+
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    padding: 30px;
+    box-shadow: var(--bs-1);
+    margin-bottom: 20px;
+}
+
+.registerForm button {
     height: 30px;
     font-size: 16px;
     font-weight: 500;
@@ -17,27 +74,56 @@
     border-radius: 6px;
     color: var(--white);
     cursor: pointer;
+    margin-top: 10px;
 }
 
-.authorization .text {
+.registerForm .text {
+    padding: 5px;
     height: 35px;
-    font-size: 16px;
-    margin-bottom: 40px;
+    font-size: 13px;
+    margin-bottom: 10px;
     outline: none;
-    border: 2.5px solid var(--grey3);
+    border: 1px solid var(--grey3);
+    border-radius: 4px;
 }
 
-.authorization .text:focus {
-    border: 2.5px solid var(--blue);
-    background: #dce7f9;
+
+
+.registerForm .text.error {
+    border: 1px solid red
 }
 
-.authorization .checkbox label,
-.authorization .checkbox input {
+.registerForm .text:focus { 
+    background: #eaeef5;
+    box-shadow: 1px 1px 2px var(--blue), -1px -1px 2px var(--blue);
+}
+
+.registerForm .text:focus.error { 
+    background: #f8e5eb;
+    box-shadow: none;
+}
+
+.registerForm .checkbox input {
     cursor: pointer;
 }
 
-.authorization .checkbox label {
+.registerForm label {
+    margin: 2px 0;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.registerForm .inputDescription {
+    color: #6a737c;
+    font-size: 12px;
+    margin: 4px 0;
+}
+
+.registerForm .inputDescription.error {
+    color: #bf1650;
+}
+
+.registerForm .checkbox label {
     margin-left: 10px;
 }
 
@@ -47,3 +133,4 @@
     left: calc(50% - 100px);
     height: 200px;
 }
+

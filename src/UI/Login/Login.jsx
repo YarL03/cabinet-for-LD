@@ -8,6 +8,7 @@ import s from "./Login.module.css"
 
 const Login = (props) => {
     const isAuth = useSelector(state => state.auth.isAuth)
+    const errorMessage = useSelector(state => state.auth.errorMessage)
     const dispatch = useDispatch()
     
     if(isAuth) return <Navigate to='/' replace/>
@@ -19,7 +20,9 @@ const Login = (props) => {
     } 
 
     return  (
-        <LoginForm s={s} submitHandler={onSubmit}/>
+        <div className={s.login}>
+            <LoginForm s={s} errorMessage={errorMessage} submitHandler={onSubmit}/>
+        </div>
     )
 } 
 

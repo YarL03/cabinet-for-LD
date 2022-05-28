@@ -1,40 +1,70 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import Button from "../../components/common/Buttons/Button";
 import style from "./RegisterForm.module.css"
 
-export const RegisterForm = ({submitHandler, s}) => {
+export const RegisterForm = ({submitHandler, errorMessage, s}) => {
     const {register, formState: {errors}, handleSubmit, setValue, getValues, reset} = useForm() // { mode: ''}
-    const errorMessage = useSelector(state => state.auth.errorMessage)
 
-    const onSubmit = () => {
-        submitHandler()
+    const onSubmit = (data) => {
+        submitHandler(data)
         reset()
     }
     
     return (
-        <>
-        <form onSubmit={handleSubmit(onSubmit)} className={s.authorization}>
-            <input type="text" className={s.text} {
-                ...register('email', {
-                    required: `This field is required`,
-                    pattern: {
-                        value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
-                        message: `Invalid email`
-                    }
-                })
-            } placeholder="Введите логин"/>
-            {errors?.email && <p className={`${style.required} ${style.first}`}>{errors.email.message}</p>}
-            <input type="text" className={s.text} {
-                ...register('password', {
-                    required: true
+        <div className={s.formWrapper}>
+        <form onSubmit={handleSubmit(onSubmit)} className={s.registerForm}>
+            <label>Имя</label>
+            <input type="text" className={`${s.text}  ${errors?.name ? s.error : ''}`} {
+                ...register('name', {
+                    required: 'Укажите имя'
                     
                 })
-            } placeholder="Введите пароль"/>
-            {errors?.password && <p className={`${style.required} ${style.second}`}>This field is required</p>}
-            <button>Зарегистрироваться</button>
-            {errorMessage && <p className={`${style.required} ${style.third}`}>{errorMessage}</p>}
+            } />
+            {errors?.name && <p className={`${style.required}`}>{errors.name.message}</p>}
+            <label>Фамилия</label>
+            <input type="text" className={`${s.text}  ${errors?.lastname ? s.error : ''}`} {
+                ...register('lastname', {
+                    required: 'Укажите фамилию' 
+                })
+            } />
+            {errors?.lastname && <p className={`${style.required}`}>{errors.lastname.message}</p>}
+            <label>Номер телефона</label>
+            <input type="text" className={`${s.text}  ${errors?.phoneNumber ? s.error : ''}`} {
+                ...register('phoneNumber', {
+                    required: 'Укажите номер телефона',
+                    pattern: {
+                        value: /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/,
+                        message: 'Некорректный номер'
+                    } 
+                })
+            } />
+            {errors?.phoneNumber && <p className={`${style.required}`}>{errors.phoneNumber.message}</p>}
+            <label>Email</label>
+            <input type="text" className={`${s.text}  ${errors?.email ? s.error : ''}`} {
+                ...register('email', {
+                    required: 'Укажите email',
+                    pattern: {
+                        value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+                        message: `Некорректный email`
+                    }
+                })
+            } />
+            {errors?.email && <p className={`${style.required} ${style.first}`}>{errors.email.message}</p>}
+            <label>Пароль</label>
+            <input type="text" className={`${s.text}  ${errors?.password ? s.error : ''}`} {
+                ...register('password', {
+                    required: 'Укажите пароль', // сделать потом обязательным наличие большой/малой латиницы
+                    minLength: 6
+                })
+            } />
+            {errors?.password && <p className={`${style.required} ${style.second}`}>{errors.password.message}</p>}
+            <p className={`${s.inputDescription} ${errors?.password ? s.error : ''}`}>Пароль должен содержать как минимум 6 символов</p>
+            <Button text='Зарегистрироваться'/>
+            {errorMessage && <p className={style.firebaseError}>{errorMessage}</p>}
         </form>
-        </>
+        <div>Уже есть аккаунт? <Link to='/login'>Войти</Link></div>
+        </div>
     )
 }

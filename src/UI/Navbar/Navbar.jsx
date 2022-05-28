@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { logout, toggleIsFetchingAuth } from "../../redux/auth-reducer";
 import Preloader from "../components/common/Preloader/Preloader";
 import s from './Navbar.module.css'
+import bsuLogo from '../../images/BSU_logo.jpg'
 
 const Navbar = () => {
     const isFetching = useSelector(state => state.auth.isFetchingAuth)
@@ -23,7 +24,7 @@ const Navbar = () => {
                 <li>
                     <a href="#">
                         <span className={`${s.icon} ${s.brandname}`}>
-                            <img src="https://yarl03.github.io/LD_project/img/BSU_logo.jpg"/>
+                            <img src={bsuLogo}/>
                         </span>
                         <span className={s.title}>Legal clinic</span>
                     </a>

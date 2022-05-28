@@ -10,7 +10,7 @@ let initialState = {
       id: null,
       login: null,
       email: null},
-    isAuth: false,
+    isAuth: true,
     isFetchingAuth: false,
     errorMessage: null
 }

@@ -2,11 +2,11 @@ import { useSelector } from "react-redux";
 import Profile from "./Profile";
 
 const ProfileContainer = (props) => {
-  const authorizedUserData = useSelector(state => state.profilePage.authorizedUserData)
+  const authUserData = useSelector(state => state.auth.authUserData)
   const posts = useSelector(state => state.profilePage.posts)
-  const statusRedux = useSelector(state => state.profilePage.authorizedUserData.status)
+  const statusRedux = useSelector(state => state.profilePage.status)
 
-  return <Profile authorizedUserData={authorizedUserData} posts={posts} statusRedux={statusRedux}/>
+  return <Profile authUserData={authUserData} posts={posts} statusRedux={statusRedux}/>
 }
 
  

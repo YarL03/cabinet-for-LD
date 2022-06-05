@@ -9,7 +9,7 @@ const RecentActitvitiesContainer =  React.memo(props => {
     const dispatch = useDispatch()
    
     useEffect(() => {
-        dispatch(getClients(props.currentPage, props.pageSize))
+        // dispatch(getClients(props.currentPage, props.pageSize))
         dispatch(getOnlineUsers())
     },[])
   

@@ -12,7 +12,7 @@ const MyPosts = React.memo(props => {
 
   const submitHandler = (data) => {
     debugger
-    dispatch(addPost(data.postInput))
+    dispatch(addPost(data.postInput, props.name, props.lastname))
   }
 
 console.log(`render MyPosts`)

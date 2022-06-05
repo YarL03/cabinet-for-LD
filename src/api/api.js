@@ -1,38 +1,156 @@
 import * as axios from "axios";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import { collection, collectionGroup, doc, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from "firebase/firestore";
 
 const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-    headers: {
-        "API-KEY": "bd2de8d1-4755-465f-a340-e726db124cb0"
-    }
-})
+  withCredentials: true,
+  baseURL: "https://social-network.samuraijs.com/api/1.0/",
+  headers: {
+    "API-KEY": "bd2de8d1-4755-465f-a340-e726db124cb0",
+  },
+});
 
 export const ClientsAPI = {
-    getClients: (currentPage, pageSize) =>  {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-            .then(response => response.data)},
-
-    getOnlineUsers: () => instance.get('users?count=10')
-    .then(response => response.data.items)
-}
-
-export const AuthAPI = {
-    getIsAuth: () => instance.get(`auth/me`)
-        .then(response => response.data),
+  getClients: (currentPage, pageSize) => {
     
-    login: (formState) => instance.post(`auth/login`, {
-        ...formState
-    }),
+  },
 
-    logout: () => instance.post(`auth/logout`)
-}
+  getOnlineUsers: () => {
+
+  },
+};
+
 
 export const ProfileAPI = {
-    updateStatus: (status) => instance.put(`profile/status`, {status}),
+  updateStatus: (status) => {
 
-    getStatus: (id) => instance.get(`profile/status/${id}`),
+  },
+
+  getStatus: (id) => {
+
+  },
+
+  getUserData: (id) => {
+
+  },
+};
+
+export const AuthAPI = {
+  getIsAuth: () => {
+    const auth = getAuth();
+      debugger
+    return new Promise((resolve) => {
+          resolve({auth, onAuthStateChanged});
+        }) 
+    // return ;
+  },
+
+  login: (data) => {
+    const auth = getAuth();
+    return signInWithEmailAndPassword(auth, data.email, data.password);
+  },
+
+  logout: () => {
+    const auth = getAuth();
+    signOut(auth)
+  },
+
+  register: async (data) => {
     
-    getUserData: (id) => instance.get(`profile/${id}`)
-        .then(response => response.data),
-} 
+    const auth = getAuth();
+
+    try {
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      const docRef = AuthAPI._setUserData(data, userCredentials.user.uid)
+    
+      console.log(docRef)
+      console.log(userCredentials)
+      return { userCredentials, docRef }
+    } catch (err) {
+      console.log(err)
+    }
+  },
+
+  _setUserData: async (data, uid) => {
+    const db = getFirestore()
+    try {
+        const docRef = await setDoc(doc(db, "users", uid), {
+            ...data,
+            online: true
+          })
+          return docRef
+    }
+    
+    catch (error) {
+        console.log(error)
+  }
+},
+}
+
+export const firestoreAPI = {
+  get: async (path) => { 
+    try {
+    const db = getFirestore()
+    debugger
+    return await getDoc(doc(db, ...path))
+  }
+    catch (err) {
+
+    }
+  },
+
+  getGroup: async (path, condition) => {
+    try{ 
+    const db = getFirestore()
+    const q = query(collection(db, ...path), where(...condition))
+    const querySnapshot = await getDocs(q)
+
+    return querySnapshot
+  }
+    catch (err) {
+      debugger
+      console.log(err)
+    }
+  },
+
+  set: (path) => {
+
+  },
+
+  update: async (path, changes) => {
+    const db = getFirestore()
+    return await updateDoc(doc(db, ...path), changes)
+  },
+
+  listenOne: (path, dispatch, action) => {
+    const db = getFirestore()
+    const unsub = onSnapshot(doc(db, ...path), (doc) => { // здесь ошибка
+      console.log(doc.data())  // надо сделать два метода
+      // dispatch(action(doc.data()))
+    })
+  },
+
+  listenGroup: (path, condition, callback) => {
+    const db = getFirestore()
+    const q = query(collection(db, ...path), where(...condition))
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      console.log(querySnapshot)
+      const arrData = []
+      querySnapshot.forEach((doc) => {
+        arrData.push(doc.data()) 
+      })
+      callback(arrData)
+      console.log(arrData)
+    })
+  },
+}

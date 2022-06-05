@@ -1,42 +1,35 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setErrorMessage, toggleIsFetchingAuth } from "../../redux/auth-reducer";
+import { register, setErrorMessage, toggleIsFetchingAuth } from "../../redux/auth-reducer";
 import { RegisterForm } from './RegisterForm/RegisterForm'
 import { collection, addDoc, getFirestore } from 'firebase/firestore'
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
 import s from "./Register.module.css"
 import RegisterDescription from "./RegisterDescription";
+import { Navigate } from "react-router-dom";
 
 
 const Register = (props) => {
+    const isAuth = useSelector(state => state.auth.isAuth)
     const dispatch = useDispatch()
     const errorMessage = useSelector(state => state.auth.errorMessage)
+
+    if (isAuth) return <Navigate to='/'/>
     
 
-    const onSubmit = async (data) => {
+    const onSubmit = (data) => {
         console.log(data)
-        const db = getFirestore()
-        const auth = getAuth()
-
-        try {
-            const response = await createUserWithEmailAndPassword(auth, data.email, data.password)
-            const docRef = await addDoc(collection(db, 'users'), {
-                ...data
-            })
-            debugger
-            console.log(docRef)
-            console.log(response)
-            dispatch(setErrorMessage(null))
-        }
-        catch (err) {
-            debugger
-            console.log(err)
-            switch (err.message) {
-                case 'Firebase: Error (auth/email-already-in-use).':
-                    dispatch(setErrorMessage('Email already in use'))
-            }
-            
-        }
+        dispatch(register(data))
+        
+        // }
+        // catch (err) {
+        //     debugger
+        //     console.log(err)
+        //     switch (err.message) {
+        //         case 'Firebase: Error (auth/email-already-in-use).':
+        //             dispatch(setErrorMessage('Email already in use'))
+        //     }  
+        // }
     } 
 
 

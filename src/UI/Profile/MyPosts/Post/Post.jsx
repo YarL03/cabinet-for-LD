@@ -22,7 +22,7 @@ const Post = (props) => {
           <UserImg />
         </div>
         <div className={s.postHeader}>
-          <h5 className={s.postAuthor}>{`${props.post.name} ${props.post.surname}`}</h5>
+          <h5 className={s.postAuthor}>{`${props.post.name} ${props.post.lastname}`}</h5>
           <div className={s.postDate}>
             <span className={s.date}>{props.post.date}</span>
           </div>

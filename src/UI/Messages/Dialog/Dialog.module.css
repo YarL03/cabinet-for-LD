@@ -6,13 +6,13 @@
 }
 
 .firstColumn {
-    box-shadow: 0 7px 25px rgba(0, 0, 0, .25);
+    box-shadow: var(--bs-1);
     display: grid;
     grid-template-rows: 50px calc(95vh - 187px) 75px;
 }
 
 .secondColumn {
-    box-shadow: 0 7px 25px rgba(0, 0, 0, .25);
+    box-shadow: var(--bs-1);
 }
 
 .topbar {

@@ -8,11 +8,13 @@
 }
 
 .firstColumn {
-    box-shadow: 0 7px 25px rgba(0, 0, 0, .25);
+    box-shadow: var(--bs-1);
+    background: var(--white);
 }
 
 .secondColumn {
-    box-shadow: 0 7px 25px rgba(0, 0, 0, .25);
+    box-shadow: var(--bs-1);
+    background: var(--white);
 }
 
 .messages a {

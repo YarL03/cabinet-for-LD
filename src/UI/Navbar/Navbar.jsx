@@ -8,14 +8,11 @@ import bsuLogo from '../../images/BSU_logo.jpg'
 
 const Navbar = () => {
     const isFetching = useSelector(state => state.auth.isFetchingAuth)
+    const {uid} = useSelector(state => state.auth.authUserData)
     const dispatch = useDispatch()
 
     const onLogout = () => {
-        dispatch(toggleIsFetchingAuth(true))
-        dispatch(logout())
-        setTimeout(() => { 
-            dispatch(toggleIsFetchingAuth(false))
-        }, 1000)
+        dispatch(logout(uid))
     }
 
     return (

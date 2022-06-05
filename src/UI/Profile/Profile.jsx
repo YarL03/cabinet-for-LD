@@ -15,6 +15,7 @@ const Profile = (props) => {
   }
 
   console.log('render')
+  debugger
   
   return (
     <div className={s.profile}>
@@ -37,16 +38,16 @@ const Profile = (props) => {
           <div className={s.pageInfo}>
             <div className={s.pageTop}>
               <div className={s.pageStatus}>
-                <div className={s.online}>{props.authorizedUserData.online}</div>
+                <div className={s.online}>{props.authUserData.online ? 'online' : 'offline'}</div>
               </div>
-              <h1 className={s.pageName}>{`${props.authorizedUserData.name} ${props.authorizedUserData.surname}`}</h1>
+              <h1 className={s.pageName}>{`${props.authUserData.name} ${props.authUserData.lastname}`}</h1>
               <StatusForm s={s} submitHandler={submitLocalStatus} statusRedux={props.statusRedux}/>
             </div>
             <div className={s.pageInfoShort}>
               <div className={s.profileInfo}>
                 <div className={s.infoRow}>
                   <h3 className={s.label}>Current city:</h3>
-                  <div className={s.labeled}>{props.authorizedUserData.currentCity}</div>
+                  <div className={s.labeled}>///</div>
                 </div>
                 <div className={s.showMore}>
                   <a>
@@ -61,7 +62,7 @@ const Profile = (props) => {
           </div>
           <div className="counts"></div>
         </div>
-        <MyPosts posts={props.posts}/>
+        <MyPosts name={props.name} lastname={props.lastname} posts={props.posts}/>
       </div>
       <div className={s.thirdColumn}>asdas</div>
     </div>

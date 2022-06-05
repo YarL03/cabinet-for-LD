@@ -5,7 +5,7 @@
     height: 500px;
     background: var(--white);
     padding: 20px;
-    box-shadow: 0 7px 25px rgba(0,0,0,0.35);
+    box-shadow: var(--bs-1);
     border-radius: 30px;
 }
 
@@ -35,8 +35,9 @@
     
 }
 
-.onlineUsers table tr td {
+.onlineUsers table tr a td {
     width: 100%;
+    padding: 5px 10px;
 }
 
 /* .onlineUsers table tbody tr:hover {
@@ -46,9 +47,14 @@
 } */
 
 .onlineUsers table tr td {
-    padding: 5px 10px;
+    width: 100%;
+    padding: 5px 10px 5px 0;
 }
 
+.onlineUsers table tr td span {
+    font-size: 14px;
+    font-weight: 500;
+}
 
 @media (max-width: 480px) {
     .cardHeader h2 {

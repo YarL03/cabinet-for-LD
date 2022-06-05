@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import "./styles/App.css";
 import { Outlet, Route, Routes } from "react-router-dom";
@@ -13,6 +13,7 @@ import { Initialization } from "./UI/hoc/Initialization";
 import { Layout } from "./UI/Layout/Layout";
 import Register from "./UI/Register/Register";
 import './firebase'
+import SomeoneElsesProfileContainer from "./UI/Profile/SomeoneElsesProfileContainer";
 
 
 
@@ -31,7 +32,12 @@ function App(props) {
 
             <Route path="profile" element={<Outlet/>}>
               <Route index element={<ProfileContainer/>}/>
-              <Route path=":id" element={<SomeoneElsesProfile/>}/> 
+              
+              <Route path=":id" element={
+                <Suspense fallback='Loading...'>
+              <SomeoneElsesProfileContainer/>
+              </Suspense>}/> 
+              
             </Route>
 
             <Route path="messages" element={<Messages/>}>

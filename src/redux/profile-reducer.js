@@ -1,19 +1,19 @@
-import { ProfileAPI } from "../api/api"
+import { firestoreAPI, ProfileAPI } from "../api/api"
 
-const ADD_POST = 'ADD-POST'
-const SET_LIKE = 'SET_LIKE'
-const SET_STATUS = 'SET_STATUS'
-const SET_AUTHORIZED_USER_DATA = 'SET_AUTHORIZED_USER_DATA'
-const SET_ANOTHER_USER_DATA = 'SET_ANOTHER_USER_DATA'
+const ADD_POST = 'profile/ADD-POST'
+const SET_LIKE = 'profile/SET_LIKE'
+const SET_STATUS = 'profile/SET_STATUS'
+const SET_AUTHORIZED_USER_DATA = 'profile/SET_AUTHORIZED_USER_DATA'
+const SET_ANOTHER_USER_DATA = 'profile/SET_ANOTHER_USER_DATA'
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 let initialState = {
-  authorizedUserData: {name:'Yaroslav', surname: 'Labetsky', online: 'online', currentCity: 'Minsk', status: '',},
-  anotherUserData: {online: 'online', currentCity: 'Minsk', status: '',},
+  status: '',
+  anotherUserData: null,
   posts: [
-    { id: 1, name:'Yaroslav', surname: 'Labetsky', message: "Hey, how are you?", likeAmount: 10, myLike: false, color: '#000', date: `22 Nov 2022`},
-    { id: 2, name:'Yaroslav', surname: 'Labetsky', message: "Hey, how are you?", likeAmount: 23, myLike: true, color: 'rgb(253, 99, 163)', date: `27 Nov 2022`},
-    { id: 3, name:'Yaroslav', surname: 'Labetsky', message: "It's my first post here", likeAmount: 5, myLike: true, color: 'rgb(253, 99, 163)', date: `28 Nov 2022`},
+    { id: 1, name:'Yaroslav', lastname: 'Labetsky', message: "Hey, how are you?", likeAmount: 10, myLike: false, color: '#000', date: `22 Nov 2022`},
+    { id: 2, name:'Yaroslav', lastname: 'Labetsky', message: "Hey, how are you?", likeAmount: 23, myLike: true, color: 'rgb(253, 99, 163)', date: `27 Nov 2022`},
+    { id: 3, name:'Yaroslav', lastname: 'Labetsky', message: "It's my first post here", likeAmount: 5, myLike: true, color: 'rgb(253, 99, 163)', date: `28 Nov 2022`},
   ],
  
   
@@ -23,14 +23,14 @@ const profileReducer = (state = initialState, action) => {
 
     switch(action.type) {
         case ADD_POST: {
-          
+          debugger
             let newPost = {
                 date: `${new Date().getDate()} ${MONTHS[new Date().getMonth()]} ${new Date().getFullYear()}`,
                 id: Date.now(),
                 message: action.postText,
                 likeAmount: "",
-                name: state.authorizedUserData.name,
-                surname: state.authorizedUserData.surname
+                name: action.name,
+                lastname: action.lastname
               };
 
           return {...state,
@@ -58,13 +58,9 @@ const profileReducer = (state = initialState, action) => {
           return action.isMe ? {...state, authorizedUserData: {...state.authorizedUserData, status: action.status}} :
             {...state, anotherUserData: {...state.anotherUserData, status: action.status}}
         }
-
-        case SET_AUTHORIZED_USER_DATA: {
-          return {...state, authorizedUserData: {...state.authorizedUserData, ...action.authorizedData}}
-        }
-        
+      
         case SET_ANOTHER_USER_DATA: {
-          return {...state, anotherUserData: {...state.anotherUserData, ...action.userData}}
+          return action.userData ? {...state, anotherUserData: {...action.userData}} : {...state, anotherUserData: action.userData}
         }
           default: return state
     }
@@ -73,9 +69,11 @@ const profileReducer = (state = initialState, action) => {
 }
 
 
-export const addPost = (postText) => ({
+export const addPost = (postText, name, lastname) => ({
   type: ADD_POST,
-  postText
+  postText,
+  name,
+  lastname
 })
 
 export const setLike = ({isLiked, id}) => ({
@@ -88,11 +86,6 @@ export const setStatus = (status, isMe) => ({
   type: 'SET_STATUS',
   status,
   isMe
-})
-
-export const setAuthorizedUserData = (authorizedData) => ({
-  type: SET_AUTHORIZED_USER_DATA,
-  authorizedData
 })
 
 export const setAnotherUserData = (userData) => ({
@@ -110,14 +103,9 @@ export const updateStatus = (status) => async (dispatch) => {
   let response = await ProfileAPI.updateStatus(status)
 }
 
-export const getUserData = (id, isMe) => async (dispatch) => {
-  let response = await ProfileAPI.getUserData(id)
-    
-        dispatch(getStatus(id, isMe))
-
-        isMe ? dispatch(setAuthorizedUserData(response)) :
-        dispatch(setAnotherUserData(response)) 
-      //доделать
+export const getAnotherUserData = (uid) => async (dispatch) => {
+  let data = (await firestoreAPI.get(['users', uid])).data()
+    dispatch(setAnotherUserData(data)) 
 }
 
 export default profileReducer

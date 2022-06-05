@@ -1,20 +1,12 @@
 import React, { useEffect } from "react";
 import s from "./Profile.module.css";
-import { NavLink, useParams } from "react-router-dom";
+import { Navigate, NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserData } from "../../redux/profile-reducer";
+import { getAnotherUser } from "../../redux/profile-reducer";
 
 const SomeoneElsesProfile = (props) => {
-  const {id} = useParams()
-  const userData = useSelector(state => state.profilePage.anotherUserData)
-  const dispatch = useDispatch()
-  
-  useEffect(() => {
-    dispatch(getUserData(+id, false))
-  }, [id])
-  
+  console.log(props.user.name)
   debugger
-  
   return (
     <div className={s.profile}>
       <div className="firstColumn">
@@ -33,18 +25,18 @@ const SomeoneElsesProfile = (props) => {
           <div className={s.pageInfo}>
             <div className={s.pageTop}>
               <div className={s.pageStatus}>
-                <div className={s.online}>{userData.online}</div>
+                <div className={s.online}>{props.user.online ? 'online' : 'offline'}</div>
               </div>
-              <h1 className={s.pageName}>{userData.fullName}</h1>
+              <h1 className={s.pageName}>{`${props.user.name} ${props.user.lastname}`}</h1>
               <div className={s.status}>
-                <div className={s.defaultStatus}>{userData.status || ""}</div>
+                <div className={s.defaultStatus}>{props.user.status || ""}</div>
               </div>
             </div>
             <div className={s.pageInfoShort}>
               <div className={s.profileInfo}>
                 <div className={s.infoRow}>
                   <h3 className={s.label}>Current city:</h3>
-                  <div className={s.labeled}>{userData.currentCity}</div>
+                  <div className={s.labeled}>{'/\./'}</div>
                 </div>
                 <div className={s.showMore}>
                   <a>

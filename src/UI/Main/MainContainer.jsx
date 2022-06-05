@@ -10,6 +10,8 @@ const MainContainer = (props) => {
     const pageSize = useSelector(state => state.mainPage.pageSize)
     const isFetching = useSelector(state => state.mainPage.isFetching)
 
+    
+
     return <Main cards={cards} currentClients={currentClients} onlineUsers={onlineUsers}
     currentPage={currentPage} totalClientsAmount={totalClientsAmount} pageSize={pageSize}
     isFetching={isFetching}/>

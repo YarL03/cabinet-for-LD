@@ -7,7 +7,8 @@
     --grey3: #818c99;
     --black1: #222;
     --black2: #999;
-    --forBack: #f1f2f3;
+    --forBack: #ebebeb;
+    --forBack1: #f1f2f3;
     --bs-1: 0 10px 24px hsla(0,0%,0%,0.05), 0 20px 48px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.1);
 }
 
@@ -41,6 +42,7 @@
     font-weight: 600;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
+    cursor: pointer;
 }
 
 .nav ul li:hover {
@@ -90,7 +92,8 @@
     line-height: 60px;
     text-align: start;
     white-space: nowrap;
-}   
+}
+
 
 .nav ul li a .ionicon  {
     width: 30px;

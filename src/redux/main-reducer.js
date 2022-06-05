@@ -1,4 +1,4 @@
-import { ClientsAPI} from "../api/api"
+import { ClientsAPI, firestoreAPI} from "../api/api"
 import BriefcaseSVG from "../UI/Main/svg/BriefcaseSVG"
 import ChatBubblesSVG from "../UI/Main/svg/ChatBubblesSVG"
 import EyeSVG from "../UI/Main/svg/EyeSVG"
@@ -112,8 +112,24 @@ export const getClients = (currentPage, pageSize) => async (dispatch) => {
 }
 
 export const getOnlineUsers = () => async (dispatch) => {
-let response = await ClientsAPI.getOnlineUsers()
-dispatch(setOnlineUsers(response))
+  try {
+    const online = await firestoreAPI.getGroup(['users'], ['online', '==', true])
+    
+    const setNewOnline = (arrUsers) => {
+      const newOnline = arrUsers.filter((item) => item.online)
+      dispatch(setOnlineUsers(newOnline))
+    }
+
+    const arr = []
+    online.forEach((doc) => arr.push(doc.data())) 
+    console.log(arr)
+    const unsubscribe = firestoreAPI.listenGroup(['users'], ['online', 'in', [false, true]], setNewOnline)
+    console.log(unsubscribe)
+    dispatch(setOnlineUsers(arr))
+  }
+  catch (err) {
+    console.log(err)
+  }
 }
 
 

@@ -13,9 +13,9 @@
 
 .userAva {
     position: relative;
-    
     width: 300px;
-    box-shadow: 0 7px 25px rgba(0,0,0,0.25);
+    box-shadow: var(--bs-1);
+    background: var(--white);
 }
 
 .userAva img {
@@ -72,9 +72,10 @@
 }
 
 .pageInfo {
-    box-shadow: 0 7px 25px rgba(0,0,0,0.25);
+    box-shadow: var(--bs-1);
     padding: 15px;
     margin-bottom: 50px;
+    background: var(--white);
 }
 
 .pageTop {
@@ -85,6 +86,8 @@
 .pageStatus {
     text-align: center;
     float: right;
+    color: var(--grey3);
+    font-weight: 500;
 }
 
 .pageInfoShort {

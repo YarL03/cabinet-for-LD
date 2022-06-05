@@ -4,6 +4,7 @@
     left: 300px;
     height: 60px;
     transition: .5s;
+    box-shadow: var(--bs-1);
 }
 
 .header.active {
@@ -53,6 +54,8 @@
     font-size: 18px;
     outline: none;
     border: 1px solid var(--black2);
+    background: var(--forBack);
+    font-size: 16px;
 }
 
 .search label svg {

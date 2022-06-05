@@ -3,7 +3,7 @@
     min-height: 500px;
     background: var(--white);
     padding: 20px 20px 40px 20px;
-    box-shadow: 0 7px 25px rgba(0,0,0,0.35);
+    box-shadow: var(--bs-1);
     border-radius: 20px;
 }
 
@@ -70,7 +70,7 @@ table thead td {
 }
 
 .recentActivities table tr td:nth-child(2) {
-    text-align: end;
+    text-align: center;
 }
 
 .recentActivities table tr td:nth-child(3) {

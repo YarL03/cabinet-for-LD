@@ -10,11 +10,13 @@
 .firstColumn {
     box-shadow: var(--bs-1);
     background: var(--white);
+    border-radius: 6px;
 }
 
 .secondColumn {
     box-shadow: var(--bs-1);
     background: var(--white);
+    border-radius: 6px;
 }
 
 .messages a {

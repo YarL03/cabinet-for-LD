@@ -1,14 +1,13 @@
 .preloader {
     position: absolute;
-    top: calc(50% - 100px);
-    left: calc(50% - 100px);
-    height: 200px;
-    border-radius: 50%;
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
+    height: 50px;
 }
 
 .preloaderWrapper {
     position: relative;
-    height: 100vh;
+    height: 100vh; 
     width: 100%;
     background: var(--white);
 }

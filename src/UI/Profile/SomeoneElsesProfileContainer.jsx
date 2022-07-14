@@ -4,7 +4,7 @@ import { Navigate, useParams } from "react-router-dom";
 import { getAnotherUserData, setAnotherUserData } from "../../redux/profile-reducer";
 import SomeoneElsesProfile from "./SomeoneElsesProfile";
 import s from '../components/common/Preloader/PreloaderBig.module.css'
-import PreloaderWrapper from "../components/common/Preloader/PreloaderWrapper";
+import Preloader from "../components/common/Preloader/Preloader";
 
 const SomeoneElsesProfileContainer = (props) => {
     const {id} = useParams()
@@ -25,7 +25,7 @@ const SomeoneElsesProfileContainer = (props) => {
     
     debugger
 
-    return userData ? <SomeoneElsesProfile user={userData}/> : <PreloaderWrapper s={s}/>
+    return userData ? <SomeoneElsesProfile user={userData}/> : <Preloader s={s}/>
 }
 
 export default SomeoneElsesProfileContainer

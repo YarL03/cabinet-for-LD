@@ -9,7 +9,9 @@ const SET_USERS = 'main/SET_USERS'
 const SET_CURRENT_CLIENTS = 'main/SET_CURRENT_CLIENTS'
 const SET_TOTAL_CLIENTS_AMOUNT = 'main/SET_TOTAL_CLIENTS_AMOUNT'
 const SET_CURRENT_PAGE = 'main/SET_CURRENT_PAGE'
-const TOGGLE_IS_FETCHING = 'main/TOGGLE_IS_FETCHING' 
+const TOGGLE_IS_FETCHING = 'main/TOGGLE_IS_FETCHING'
+const SET_LISTENER = 'main/SET_LISTENER' 
+const CALL_UNSUB = 'main/CALL_UNSUB'
 
 const statuses = [{status: 'Resolved', style: "#8de02c"}, {status: 'Waiting', style: "#f9ca3f"}, 
 {status: 'In progress', style: "#1795c1"}, {status: 'Rejected', style: "#f00"}]
@@ -35,9 +37,10 @@ let initialState = {
       currentClients: [],
       totalClientsAmount: 0,
       currentPage: 1,
-      onlineUsers: [],
+      onlineUsers: null,
       pageSize: 8,
       isFetching: false,
+      listeners: []
 }
 
 const mainReducer = (state = initialState, action) => {
@@ -59,7 +62,15 @@ const mainReducer = (state = initialState, action) => {
       return {...state, currentPage: action.currentPage}
       
     case TOGGLE_IS_FETCHING:
-      return {...state, isFetching: action.isFetching} 
+      return {...state, isFetching: action.isFetching}
+      
+    case SET_LISTENER: 
+      return {...state, listeners: [...state.listeners, action.listener]}
+
+    case CALL_UNSUB: {
+      state.listeners.forEach(unsub => unsub())
+      return {...state, listeners: []}
+    }
 
     default: return state
   }
@@ -113,24 +124,33 @@ export const getClients = (currentPage, pageSize) => async (dispatch) => {
 
 export const getOnlineUsers = () => async (dispatch) => {
   try {
-    const online = await firestoreAPI.getGroup(['users'], ['online', '==', true])
-    
+    const online = await firestoreAPI.getCondition(['users'], ['online', '==', true])
+    const arr = []
+
     const setNewOnline = (arrUsers) => {
       const newOnline = arrUsers.filter((item) => item.online)
       dispatch(setOnlineUsers(newOnline))
     }
 
-    const arr = []
     online.forEach((doc) => arr.push(doc.data())) 
     console.log(arr)
     const unsubscribe = firestoreAPI.listenGroup(['users'], ['online', 'in', [false, true]], setNewOnline)
-    console.log(unsubscribe)
     dispatch(setOnlineUsers(arr))
+    dispatch(setListener(unsubscribe))
   }
   catch (err) {
     console.log(err)
   }
 }
+
+export const setListener = (listener) => ({
+  type: SET_LISTENER,
+  listener
+})
+
+export const callUnsub = () => ({
+  type: CALL_UNSUB
+})
 
 
 export default mainReducer

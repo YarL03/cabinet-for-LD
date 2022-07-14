@@ -1,6 +1,8 @@
 import React from "react";
 import OnlineUsers from "./OnlineUsers/OnlineUsers";
 import s from './OnlineUsersComponent.module.css'
+import style from '../../../components/common/Preloader/PreloaderSmall.module.css'
+import Preloader from "../../../components/common/Preloader/Preloader";
 
 const OnlineUsersComponent = (props) => {
     
@@ -11,11 +13,12 @@ const OnlineUsersComponent = (props) => {
                         <h2>Online Users</h2>
                     </div>
                     <div className={s.tableWrapper}>
-                    <table>
+                    {props.onlineUsers ? <table>
                         <tbody>
-                            <OnlineUsers onlineUsers={props.onlineUsers}/>
+                         <OnlineUsers onlineUsers={props.onlineUsers}/>
                         </tbody>
                     </table>
+                    : <Preloader s={style}/>}
                     </div>
                 </div>
 

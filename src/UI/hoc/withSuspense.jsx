@@ -1,10 +1,10 @@
 import React from "react";
 import Preloader from "../components/common/Preloader/Preloader";
+import s from '../components/common/Preloader/PreloaderBig.module.css'
 
-export const withSuspense = (Component) => {
+export const withSuspense = ({children}) => {
 
-    return (props) => {
-        <React.Suspense fallback={<h1>Loading...</h1>}>
-            <Component {...props}/>
-        </React.Suspense>} 
+    return <React.Suspense fallback={<Preloader s={s}/>}>
+            {children}
+        </React.Suspense>
 }

@@ -6,15 +6,15 @@ export const MessageForm = ({submitHandler, s, ...restProps}) => {
 
     const onSubmit = (data) => {
         debugger
-        if(!getValues('messageInput')) return
+        if(!getValues('content')) return
         submitHandler(data)
-        setValue('messageInput', '')
+        setValue('content', '')
     }
 
     const enterSubmit = (e) => {
         if(e.key === "Enter" && e.shiftKey == false) {
             debugger
-            const data = {messageInput: e.target.value}
+            const data = {content: e.target.value}
             e.target.blur()
             return handleSubmit(onSubmit(data))
         }
@@ -24,7 +24,7 @@ export const MessageForm = ({submitHandler, s, ...restProps}) => {
         <form className={s.textArea}>
           <div className={s.docs}></div>
           <textarea autoFocus {
-              ...register('messageInput')
+              ...register('content')
           }
             onKeyPress={enterSubmit}
             placeholder='Write a message'

@@ -3,15 +3,19 @@ import s from './RecentActitvitiesContainer.module.css'
 import RecentActivities from "./RecentActitvities/RecentActivities";
 import OnlineUsersComponent from "./OnlineUsersComponent/OnlineUsersComponent";
 import { useDispatch } from "react-redux";
-import { getClients, getOnlineUsers } from "../../../redux/main-reducer";
+import { getOnlineUsers } from "../../../redux/main-reducer";
+import { useState } from "react";
 
 const RecentActitvitiesContainer =  React.memo(props => {
     const dispatch = useDispatch()
-   
+
     useEffect(() => {
-        // dispatch(getClients(props.currentPage, props.pageSize))
+        console.log('онлайн юзеры')
+        debugger
+        if (!props.onlineUsers)
         dispatch(getOnlineUsers())
-    },[])
+          
+    }, [])
   
     return (
             <div className={s.details}>

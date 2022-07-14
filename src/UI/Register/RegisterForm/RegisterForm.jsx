@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "../../components/common/Buttons/Button";
 import style from "./RegisterForm.module.css"
 
-export const RegisterForm = ({submitHandler, errorMessage, s}) => {
+export const RegisterForm = ({submitHandler, cF, errorMessage, s}) => {
     const {register, formState: {errors}, handleSubmit, setValue, getValues, reset} = useForm() // { mode: ''}
 
     const onSubmit = (data) => {
@@ -64,7 +64,7 @@ export const RegisterForm = ({submitHandler, errorMessage, s}) => {
             <Button text='Зарегистрироваться'/>
             {errorMessage && <p className={style.firebaseError}>{errorMessage}</p>}
         </form>
-        <div>Уже есть аккаунт? <Link to='/login'>Войти</Link></div>
+        <div>Уже есть аккаунт? <Link onClick={cF} to='/login'>Войти</Link></div>
         </div>
     )
 }

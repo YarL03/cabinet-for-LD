@@ -10,10 +10,10 @@ export const Message = (props) => {
             </div>
             <div className={s.content}>
                 <div className={s.nameAndDate}>
-                    <div className={s.name}>{props.name}</div>
-                    <div className={s.date}>{props.date}</div>
+                    <div className={s.name}>{props.message.name + ' ' + props.message.lastname}</div>
+                    <div className={s.date}>10:05</div>
                 </div>
-                <div className={s.innerContent}>{props.message}</div>
+                <div className={s.innerContent}>{props.message.content}</div>
             </div>
         </div>
     )

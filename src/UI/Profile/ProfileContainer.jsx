@@ -1,12 +1,19 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setStatus, updateStatus } from "../../redux/auth-reducer";
 import Profile from "./Profile";
 
 const ProfileContainer = (props) => {
   const authUserData = useSelector(state => state.auth.authUserData)
+  
   const posts = useSelector(state => state.profilePage.posts)
-  const statusRedux = useSelector(state => state.profilePage.status)
+  const dispatch = useDispatch()
 
-  return <Profile authUserData={authUserData} posts={posts} statusRedux={statusRedux}/>
+  const submitStatus = (status) => {
+    dispatch(setStatus(status))
+    dispatch(updateStatus(authUserData.uid, status))
+  }
+
+  return <Profile authUserData={authUserData} posts={posts} submitHandler={submitStatus}/>
 }
 
  

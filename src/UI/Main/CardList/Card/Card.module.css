@@ -6,6 +6,7 @@
     display: flex;
     justify-content: space-between;
     box-shadow: var(--bs-1);
+    transition: background .2s ;
 }
 
 .numbers {

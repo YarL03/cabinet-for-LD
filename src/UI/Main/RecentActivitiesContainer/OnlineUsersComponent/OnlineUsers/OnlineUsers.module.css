@@ -16,6 +16,10 @@
     object-fit: cover;
 }
 
+.onlineUsers {
+    cursor: default;
+}
+
 .onlineUsers:hover {
     background:  var(--blue);
     color: var(--white);

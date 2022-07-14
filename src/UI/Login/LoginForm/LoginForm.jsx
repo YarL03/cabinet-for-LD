@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import Button from "../../components/common/Buttons/Button";
 import style from "./LoginForm.module.css"
 
-export const LoginForm = ({errorMessage, submitHandler, s}) => {
+export const LoginForm = ({cF, errorMessage, submitHandler, s}) => {
     const {register, formState: {errors}, handleSubmit, setValue, getValues} = useForm() // { mode: ''}
     
     
@@ -39,7 +39,7 @@ export const LoginForm = ({errorMessage, submitHandler, s}) => {
                 </div>
                 <Button text='Войти'/>
             {errorMessage && <p className={`${style.required} ${style.third}`}>{errorMessage}</p>}
-            <div className={s.routePhrase}>Впервые здесь? <Link to='/register'>Зарегистрироваться</Link></div>
+            <div className={s.routePhrase}>Впервые здесь? <Link onClick={cF} to='/register'>Зарегистрироваться</Link></div>
         </form>
         
         </>

@@ -1,32 +1,39 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { addMessage } from "../../../redux/messsages-reducer";
+import PreloaderWrapper from "../../components/common/Preloader/PreloaderWrapper";
 import UserImg from "../../СrosspageComponents/UserImg";
-import { Chats } from "../Chats/Chats";
 import s from "./Dialog.module.css";
 import { Message } from "./Message/Message";
 import { MessageForm } from "./MessageForm";
+import style from '../../components/common/Preloader/PreloaderBig.module.css'
+import Preloader from "../../components/common/Preloader/Preloader";
+import { useRef } from "react";
+import { useEffect } from "react";
+import { setMessages } from "../../../redux/messsages-reducer";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 //переписать на хуки
-export const Dialog = (props) => {
+export const Dialog = ({user, messages, submitMessage}) => {
+  const messageArea = useRef(null)
   const dispatch = useDispatch()
-  const {id} = useParams() // Я в шоке: тут приходит строка, а я даже не знал об этом
-  const data = props.dialogs.filter(item => item.id === +id)[0] // ВАЖНО
 
-  const submitHandler = (data) => {
-    debugger
-    dispatch(addMessage(+id, data.messageInput))
-  }
+  
+  useEffect(() => {
+    if (messageArea.current && messages) {
+      messageArea.current.scrollTo(0, messageArea.current.scrollHeight)
+     }
+     
+  })
+  
 
   return (
     <div className={s.dialog}>
       <div className={s.firstColumn}>
         <div className={s.topbar}>
-          <div className={s.back}>Back</div>
+          {user ? <><div className={s.back}>Back</div>
           <div className={s.nameStatus}>
-            <div className={s.name}>{data.name}</div>
-            <div className={s.status}>online</div>
+            <div className={s.name}>{user.name + ' ' + user.lastname}</div>
+            <div className={s.status}>{user.online ? 'online' : 'Не в сети'}</div>
           </div>
           <div className={s.actions}>
             <svg
@@ -58,19 +65,21 @@ export const Dialog = (props) => {
           </div>
           <div className={s.userImg}>
             <UserImg />
-          </div>
+          </div></>
+          : <div className={s.nameStatus}></div>}
         </div>
         <div className={s.messagesArea}>
-          <div className={s.area}>{
-            data.messages.map( (item, index) => 
-            <Message key={index} date={data.date} name={data.name} message={item}/>
-            )}</div>
+         <div ref={messageArea} className={s.area}>{ messageArea.current && messages ?
+            messages.map( (item, index) => 
+            <Message key={index} date={'data.date'} message={item}/>
+            )
+          
+          : <Preloader s={{height: '75px', position: 'relative',
+          top: 'calc(50% - 37.5px)'}}/>}
+          </div>
         </div>
-        <MessageForm s={s} submitHandler={submitHandler}/>
+        <MessageForm s={s} submitHandler={submitMessage}/>
       </div>
-      {/* <div className={s.secondColumn}>
-        <Chats />
-      </div> */}
     </div>
   );
 };

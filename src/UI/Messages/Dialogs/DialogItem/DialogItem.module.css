@@ -1,6 +1,6 @@
 .dialogItem {
     padding: 15px;
-    cursor: pointer;
+    
     border-bottom: 1px dashed var(--grey2);
     display: flex;
 }
@@ -8,6 +8,11 @@
 .dialogItem:hover {
     background: rgb(225, 228, 236);
     border-bottom: 1px solid var(--grey2);
+    cursor: pointer;
+}
+
+.dialogItem:hover .messageContent .content .circle {
+    background-color: rgb(255, 166, 0);
 }
 
 .messageContent {
@@ -24,6 +29,9 @@
 
 .messageContent .content {
     width: 100%;
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
 }
 
 .messageContent .message {
@@ -37,18 +45,23 @@
 }
 
 .messageContent .message span {
-    height: 18px;
+    padding: 2px 5px;
     white-space: nowrap;
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
+    border-radius: 3px;
 }
 
-.messageContent .content {
-    display: flex;
-    margin-top: 10px;
+.messageContent .content .circle {
+    background: var(--blue);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: relative;
+    left: 5px;
 }
 
 .innerImg {
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .innerImg div {

@@ -2,17 +2,10 @@ import React from "react";
 import s from "./Profile.module.css";
 import { NavLink } from "react-router-dom";
 import MyPosts from "./MyPosts/MyPosts";
-import { useDispatch } from "react-redux";
-import { setStatus, updateStatus } from "../../redux/profile-reducer";
 import { StatusForm } from "./StatusForm";
 
 const Profile = (props) => { 
-  const dispatch = useDispatch()
-
-  const submitLocalStatus = (status) => {
-    dispatch(setStatus(status, true))
-    dispatch(updateStatus(status))
-  }
+  
 
   console.log('render')
   debugger
@@ -23,7 +16,7 @@ const Profile = (props) => {
         <div className={s.userAva}>
           <img src="https://sun9-45.userapi.com/impg/pdhdc93j8Ib2TqV8rjKE644cHAzrpbN6BprpSg/lLtLcMfaXN8.jpg?size=1280x960&quality=95&sign=1c61305bbc5cd4a882295f78385a37af&type=album" />
           <NavLink to="/">
-            <span>Edit</span>
+            <span>Редактировать</span>
           </NavLink>
         </div>
         <div className={s.servicesBtns}>
@@ -41,7 +34,7 @@ const Profile = (props) => {
                 <div className={s.online}>{props.authUserData.online ? 'online' : 'offline'}</div>
               </div>
               <h1 className={s.pageName}>{`${props.authUserData.name} ${props.authUserData.lastname}`}</h1>
-              <StatusForm s={s} submitHandler={submitLocalStatus} statusRedux={props.statusRedux}/>
+              <StatusForm s={s} submitHandler={props.submitHandler} status={props.authUserData.status}/>
             </div>
             <div className={s.pageInfoShort}>
               <div className={s.profileInfo}>

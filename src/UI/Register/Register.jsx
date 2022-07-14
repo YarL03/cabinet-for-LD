@@ -19,8 +19,7 @@ const Register = (props) => {
 
     const onSubmit = (data) => {
         console.log(data)
-        dispatch(register(data))
-        
+        dispatch(register(data)) 
         // }
         // catch (err) {
         //     debugger
@@ -32,12 +31,16 @@ const Register = (props) => {
         // }
     } 
 
+    const cF = () => {
+        dispatch(setErrorMessage(null, null))
+    }
+
 
 
     return  ( 
     <div className={s.register}>
         <RegisterDescription s={s}/>
-        <RegisterForm s={s} submitHandler={onSubmit} errorMessage={errorMessage}/>
+        <RegisterForm s={s} submitHandler={onSubmit} errorMessage={errorMessage} cF={cF}/>
     </div>
     )
 } 

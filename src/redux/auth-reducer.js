@@ -1,13 +1,14 @@
-import { AuthAPI, firestoreAPI } from "../api/api"
+import { AuthAPI, firestoreAPI, ProfileAPI } from "../api/api"
 
 const SET_USER_DATA = 'auth/SET_USER_DATA' 
 const TOGGLE_IS_FETCHING_AUTH = 'auth/TOGGLE_IS_FETCHING_AUTH'
 const SET_IS_AUTH = 'auth/SET_IS_AUTH'
-const SET_ERROR_MESSAGE = 'auth/SET_ERROR_MESSAGE'  
+const SET_ERROR_MESSAGE = 'auth/SET_ERROR_MESSAGE'
+const SET_STATUS = 'profile/SET_STATUS'  
 
 let initialState = {
     authUserData: null,
-    isAuth: false,
+    isAuth: null,
     isFetchingAuth: false,
     errorMessage: null,
     errorCode: null
@@ -26,6 +27,10 @@ const authReducer = (state = initialState, action) => {
 
     case SET_ERROR_MESSAGE: 
       return {...state, errorMessage: action.errorMessage}
+
+    case SET_STATUS: {
+      return {...state, authUserData: {...state.authUserData, status: action.status}} 
+        }
 
     default: return state
   }
@@ -54,6 +59,7 @@ export const setIsAuth = (isAuth) => ({
 
 export const getIsAuth = () => async (dispatch) => {
   debugger
+  try {
   const {auth, onAuthStateChanged} = await AuthAPI.getIsAuth()
    debugger
    onAuthStateChanged(auth, async (user) => {
@@ -62,29 +68,35 @@ export const getIsAuth = () => async (dispatch) => {
       console.log(data)
       dispatch(setAuthUserData({...data, uid: user.uid}))
       dispatch(setIsAuth(true))
-     }
+     } else dispatch(setIsAuth(false))
    })
-    
-      debugger
+   debugger
+  }
+ catch (err) {
+  console.log(err)
+ }     
       
 }
 
 export const login = (formState) => async (dispatch) => {
-  
+  debugger
     try {
+      debugger
       const userCredentials = await AuthAPI.login(formState)
       const uid = userCredentials.user.uid
       await firestoreAPI.update(['users', uid], {online: true})
-      const data = (await firestoreAPI.get(['users', uid])).data()
+      const data = (await ProfileAPI.getUserData(['users', uid])).data()
       console.log(data)
+      debugger
       dispatch(setAuthUserData({...data, uid}))
       console.log(userCredentials)
-      dispatch(setErrorMessage(null))
+      // dispatch(setErrorMessage(null, null))
       dispatch(setIsAuth(true))
     }
     catch (error) {
       const errorCode = error.code
       const errorMessage = error.message
+      console.log(error)
       dispatch(setErrorMessage(errorMessage, errorCode))
       dispatch(toggleIsFetchingAuth(false))}
 }
@@ -92,12 +104,9 @@ export const login = (formState) => async (dispatch) => {
 export const logout = (uid) => async (dispatch) => {
   try {
     console.log(uid)
-    
-    await AuthAPI.logout()
+    await AuthAPI.logout(uid)
     dispatch(setIsAuth(false))
     dispatch(setAuthUserData(null))
-    await firestoreAPI.update(['users', uid], {online: false})
-    
   }
 
   catch (error) {
@@ -116,6 +125,7 @@ export const register = (data) => async (dispatch) => {
     name: data.name,
     online: true,
     phoneNumber: data.phoneNumber,
+    status: '',
     uid}))
  }
 
@@ -123,6 +133,16 @@ export const register = (data) => async (dispatch) => {
   console.log(error.message)
  }
  
+}
+
+export const setStatus = (status) => ({
+  type: SET_STATUS,
+  status
+})
+
+export const updateStatus = (uid, status) => async (dispatch) => {
+  let response = await ProfileAPI.updateStatus(uid, status)
+  dispatch(setStatus(status))
 }
 
 export default authReducer

@@ -75,6 +75,16 @@
     text-align: center;
 }
 
+.nav ul li a .icon .circle {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: red;
+    position: absolute;
+    top: 36px;
+    right: 18px;
+}
+
 .nav ul li a .icon.brandname img {
     position: relative;
     width: 45px;
@@ -92,8 +102,29 @@
     line-height: 60px;
     text-align: start;
     white-space: nowrap;
+    width: 50%;
 }
 
+.nav ul li a .rightCounterWrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.nav ul li a .rightCounterWrap .rightCounter {
+    padding: 1.5px 8px;
+    background: var(--white);
+    border-radius: 50%;
+    text-align: center;
+    color: var(--blue);
+}
+
+.nav ul li:hover a .rightCounterWrap .rightCounter {
+    color: var(--white);
+    background: #287bff;
+}
 
 .nav ul li a .ionicon  {
     width: 30px;

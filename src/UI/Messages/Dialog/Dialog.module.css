@@ -54,12 +54,16 @@
     cursor: pointer;
 }
 
+.messagesArea {
+   height: calc(95vh - 187px);
+}
+
 .messagesArea .area {
     height: 100%;
     display: flex;
-    padding: 0 30px;
+    padding: 10px 30px;
     flex-direction: column;
-    justify-content: flex-end;
+    overflow-y: scroll;
 }
 
 .textArea {

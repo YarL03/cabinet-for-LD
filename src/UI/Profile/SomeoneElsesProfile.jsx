@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import s from "./Profile.module.css";
-import { Navigate, NavLink, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getAnotherUser } from "../../redux/profile-reducer";
+import { NavLink } from "react-router-dom";
+
+
 
 const SomeoneElsesProfile = (props) => {
   console.log(props.user.name)
@@ -12,6 +12,9 @@ const SomeoneElsesProfile = (props) => {
       <div className="firstColumn">
         <div className={s.userAva}>
           <img src="https://sun9-45.userapi.com/impg/pdhdc93j8Ib2TqV8rjKE644cHAzrpbN6BprpSg/lLtLcMfaXN8.jpg?size=1280x960&quality=95&sign=1c61305bbc5cd4a882295f78385a37af&type=album" />
+          <NavLink to={`/messages/${props.user.uid}`}>
+            <span>Написать сообщение</span>
+          </NavLink>
         </div>
         <div className={s.servicesBtns}>
           <button>Здесь что-то будет</button>
@@ -28,7 +31,7 @@ const SomeoneElsesProfile = (props) => {
                 <div className={s.online}>{props.user.online ? 'online' : 'offline'}</div>
               </div>
               <h1 className={s.pageName}>{`${props.user.name} ${props.user.lastname}`}</h1>
-              <div className={s.status}>
+              <div className={s.statusStranger}>
                 <div className={s.defaultStatus}>{props.user.status || ""}</div>
               </div>
             </div>
